@@ -1,0 +1,213 @@
+{
+  "slug": "diya-foundation",
+  "name": "Diya Foundation",
+  "registration_number": "386/98-99",
+  "auditor_name": "Das Kumar And Company",
+  "created_at": "2013-02-08T09:28:51.000Z",
+  "updated_at": "2020-02-25T06:11:35.814Z",
+  "external_profiles": [{
+  "label": "Website",
+  "uri": "http://www.diyafoundation-india.org/Site/index.html"
+  }, {
+  "label": "Youtube",
+  "uri": "http://www.youtube.com/watch?v=DezbmReWMf0"
+  }],
+  "tags": ["hoh18", "lfc19", "tbpp", "housie19", "gfc2020", "housie18"]
+}
+
+
+
+[
+  {
+      "op": "replace",
+      "path": "/tags/5",
+      "value": "spbm18"
+  },
+  {
+      "op": "replace",
+      "path": "/tags/4",
+      "value": "bengaluru10k-18"
+  },
+  {
+      "op": "replace",
+      "path": "/tags/3",
+      "value": "lfc18-wow2"
+  },
+  {
+      "op": "replace",
+      "path": "/tags/2",
+      "value": "tcs10k-18"
+  },
+  {
+      "op": "replace",
+      "path": "/tags/1",
+      "value": "lfc18-cbp"
+  },
+  {
+      "op": "replace",
+      "path": "/tags/0",
+      "value": "lfc18"
+  },
+  {
+      "op": "add",
+      "path": "/tags/6",
+      "value": "housie18"
+  },
+  {
+      "op": "add",
+      "path": "/tags/7",
+      "value": "hoh18"
+  },
+  {
+      "op": "add",
+      "path": "/tags/8",
+      "value": "lfc19"
+  },
+  {
+      "op": "add",
+      "path": "/tags/9",
+      "value": "tbpp"
+  },
+  {
+      "op": "add",
+      "path": "/tags/10",
+      "value": "housie19"
+  },
+  {
+      "op": "add",
+      "path": "/tags/11",
+      "value": "gfc2020"
+  },
+  {
+      "op": "replace",
+      "path": "/external_profiles/1/uri",
+      "value": "https://www.facebook.com/pages/DIYA-Foundation/"
+  },
+  {
+      "op": "replace",
+      "path": "/external_profiles/1/label",
+      "value": "Facebook"
+  },
+  {
+      "op": "add",
+      "path": "/external_profiles/2",
+      "value": {
+          "label": "Youtube",
+          "uri": "http://www.youtube.com/watch?v=DezbmReWMf0"
+      }
+  },
+  {
+      "op": "add",
+      "path": "/official_name",
+      "value": "Diya Foundation"
+  }
+]
+
+
+
+
+'{' +
+  '"slug": "diya-foundation",' + 
+  '"name": "Diya Foundation",' + 
+  '"registration_number": "386/98-99",' + 
+  '"auditor_name": "Das Kumar And Company",' + 
+  '"created_at": "2013-02-08T09:28:51.000Z",' + 
+  '"updated_at": "2020-02-25T06:11:35.814Z",' + 
+  '"external_profiles": [{' + 
+  '"label": "Website",' + 
+  '"uri": "http://www.diyafoundation-india.org/Site/index.html"' + 
+  '}, {' + 
+  '"label": "Youtube",' + 
+  '"uri": "http://www.youtube.com/watch?v=DezbmReWMf0"' + 
+  }],
+  '"tags": ["hoh18", "lfc19", "tbpp", "housie19", "gfc2020", "housie18"]' + 
+''}'
+
+
+
+
+'[' + '\n' + 
+'  {' + '\n' +
+'      "op": "replace",' + '\n' +
+'      "path": "/tags/5",' + '\n' +
+'      "value": "spbm18"' + '\n' +
+'  },' + '\n' +
+'  {' + '\n' +
+'      "op": "replace",' + '\n' +
+'      "path": "/tags/4",' + '\n' +
+'      "value": "bengaluru10k-18"' + '\n' +
+'  },' + '\n' +
+'  {' + '\n' +
+'      "op": "replace",' + '\n' +
+'      "path": "/tags/3",' + '\n' +
+'      "value": "lfc18-wow2"' + '\n' +
+'  },' + '\n' +
+'  {' + '\n' +
+'      "op": "replace",' + '\n' +
+'      "path": "/tags/2",' + '\n' +
+'      "value": "tcs10k-18"' + '\n' +
+'  },' + '\n' +
+'  {' + '\n' +
+'      "op": "replace",' + '\n' +
+'      "path": "/tags/1",' + '\n' +
+'      "value": "lfc18-cbp"' + '\n' +
+'  },' + '\n' +
+'  {' + '\n' +
+'      "op": "replace",' + '\n' +
+'      "path": "/tags/0",' + '\n' +
+'      "value": "lfc18"' + '\n' +
+'  },' + '\n' +
+'  {' + '\n' +
+'      "op": "add",' + '\n' +
+'      "path": "/tags/6",' + '\n' +
+'      "value": "housie18"' + '\n' +
+'  },' + '\n' +
+'  {' + '\n' +
+'      "op": "add",' + '\n' +
+'      "path": "/tags/7",' + '\n' +
+'      "value": "hoh18"' + '\n' +
+'  },' + '\n' +
+'  {' + '\n' +
+'      "op": "add",' + '\n' +
+'      "path": "/tags/8",' + '\n' +
+'      "value": "lfc19"' + '\n' +
+'  },' + '\n' +
+'  {' + '\n' +
+'      "op": "add",' + '\n' +
+'      "path": "/tags/9",' + '\n' +
+'      "value": "tbpp"' + '\n' +
+'  },' + '\n' +
+'  {' + '\n' +
+'      "op": "add",' + '\n' +
+'      "path": "/tags/10",' + '\n' +
+'      "value": "housie19"' + '\n' +
+'  },' + '\n' +
+'  {' + '\n' +
+'      "op": "add",' + '\n' +
+'      "path": "/tags/11",' + '\n' +
+'      "value": "gfc2020"' + '\n' +
+'  },' + '\n' +
+'  {' + '\n' +
+'      "op": "replace",' + '\n' +
+'      "path": "/external_profiles/1/uri",' + '\n' +
+'      "value": "https://www.facebook.com/pages/DIYA-Foundation/"' + '\n' +
+'  },' + '\n' +
+'  {' + '\n' +
+'      "op": "replace",' + '\n' +
+'      "path": "/external_profiles/1/label",' + '\n' +
+'      "value": "Facebook"' + '\n' +
+'  },' + '\n' +
+'  {' + '\n' +
+'      "op": "add",' + '\n' +
+'      "path": "/external_profiles/2",' + '\n' +
+'      "value": {' + '\n' +
+'          "label": "Youtube",' + '\n' +
+'          "uri": "http://www.youtube.com/watch?v=DezbmReWMf0"' + '\n' +
+'      }' + '\n' +
+'  },' + '\n' +
+'  {' + '\n' +
+'      "op": "add",' + '\n' +
+'      "path": "/official_name",' + '\n' +
+'      "value": "Diya Foundation"' + '\n' +
+'  }' + '\n' +
+']'

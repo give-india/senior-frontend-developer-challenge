@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/style.css"/>
+  <title>JSON Patch Example</title>
+</head>
+<body>
+
+  <div id="jsonPatchApp">
+    <h3>Verify and Approve Changes</h3>
+
+    <div class="inputContainer">
+      <div class="inputBox">
+        <p>JSON Object {}</p>
+        <textarea v-model="input">
+          
+        </textarea>
+      </div>
+      <div class="inputBox">
+        <p>JSON Patch File {}</p>
+        <textarea v-model="patch">            
+        </textarea>
+      </div>
+    </div>
+    <button class="update" v-on:click="exec">Execute Patch</button>
+    <div class="outputContainer">
+      <div class="operations">
+        <div v-for="(patch,index) in jsonPatch" class="operation-item" key="index" v-on:click="seeDiff(index)">
+          <!-- @mouseover="seeDiff(index)" -->
+          <h5>Operation: {{patch.op}}</h5>
+          <p>Path: {{patch.path}}</p>
+          <p>Value: {{patch.value}}</p>
+          <button class="action" v-on:click="accept(index)">Accept</button> | <button class="action" v-on:click="reject(index)">Reject</button>
+        </div>
+      </div>
+      <div class="output">
+        <pre>   
+{{objectstring}}          
+        </pre>
+      </div>      
+    </div>
+  </div>
+  
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="js/script.js" type="text/javascript"></script>
+</html>
