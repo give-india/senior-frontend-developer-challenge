@@ -134,6 +134,7 @@ let jsonPatchApp = new Vue({
     newJsonObj: {}, // Object to store the modified JSON Input Value;    
     jsonHTML: '', // String to store the Stingified Object to be displayed in HTML. 
     testMessage: '', // String to store the success message.  
+    test: null,
   },
 
   watch: {
@@ -481,15 +482,18 @@ let jsonPatchApp = new Vue({
     },
 
     showFailure(){      
-      this.testMessage = '<span class="danger">Test Failed</span>';
+      this.testMessage = 'Test Failed';
+      this.test = false;
     },
 
     showSuccess(){      
-      this.testMessage = '<span class="new">Test Succeeded</span>';
+      this.testMessage = 'Test Succeeded';
+      this.test = true;
     },
 
     showNothing(){      
       this.testMessage = '';
+      this.test = null;
     }
   }
 });
