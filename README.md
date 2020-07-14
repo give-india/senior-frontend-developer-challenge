@@ -174,3 +174,11 @@ Name: Rohit Nair | rohitcse081@gmail.com
 
 - [Linked In](https://www.linkedin.com/in/rohit-s-nair-51218999/)
 - [GitHub](https://github.com/rhit99900)
+
+### How Does it work?
+
+- Enter the Base JSON Object that needs to be updated.
+- Enter the JSON Patch that needs to operated.
+- The User will get a list of operations on the screen
+- On clicking on the operation, the user gets to see what changes were made by the patch and gets to accept/reject the patch.
+
