@@ -9,7 +9,7 @@ h3.title{
   height: 60px;
   line-height: 60px;
   text-align: center;
-  background: #37474F;
+  background: #212121;
   color: #FFF;
   position: fixed;
   margin-top: 0px;  
@@ -20,6 +20,14 @@ h3.title{
   display: flex;
   padding-top: 60px;
   flex-direction: row;  
+  background: #ECEFF1;
+  padding: 60px 0 10px 0;
+}
+
+.buttonContainer{
+  background: #ECEFF1;
+  padding: 20px 0;
+  text-align: center;
 }
 
 .outputContainer{
@@ -30,21 +38,25 @@ h3.title{
 
 .inputBox{
   width: 50%;
+  color: #263238;
+  font-weight: bold;
+  text-align: center;
+  /* background-color: #263238; */
 }
 
 .operations{
   width: 30%;
   padding: 10px;
-  /* height: 50vh;
-  overflow-y: scroll; */
+  height: 100vh;
+  overflow-y: scroll;
   background: #90A4AE;
 }
 
 .output{
   width: 70%;  
   padding: 10px;
-  /* height: 50vh;
-  overflow-y: scroll; */
+  height: 100vh;
+  overflow-y: scroll;
   background: #263238;
   color: #FFF;
 }
@@ -58,7 +70,8 @@ h3.title{
   float: right;
   text-align: center;
   margin: -10px -10px 0 0;
-  background: #009688;  
+  background: #455A64;  
+  color: #FFEB3B;
 }
 
 .operation-item{

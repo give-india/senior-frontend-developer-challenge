@@ -2,7 +2,8 @@ let jsonPatchApp = new Vue({
   el: '#jsonPatchApp',
   data: {    
     // input: '{ "foo": "bar"}', // Input Text of JSON Object that needs to be modified.
-    input: '{' + '\n' +
+    // Sample JSON Text Input for Input Object
+    input: '{' + '\n' + 
       '"slug": "diya-foundation",' + '\n' + 
       '"name": "Diya Foundation",' + '\n' + 
       '"registration_number": "386/98-99",' + '\n' + 
@@ -19,6 +20,7 @@ let jsonPatchApp = new Vue({
       '"tags": ["hoh18", "lfc19", "tbpp", "housie19", "gfc2020", "housie18"]' + '\n' + 
     '}',    
     // patch: '[ { "op": "add", "path": "/baz", "value": "qux" }]', // Input Text of JSON Patch that needs to be executed.
+    // Sample JSON Text Input for Patch
     patch: '[' + '\n' + 
     '  {' + '\n' +
     '      "op": "replace",' + '\n' +
@@ -119,38 +121,49 @@ let jsonPatchApp = new Vue({
     '  }' + '\n' +
     ']',
     // patch: null, // Input Text of JSON Patch that needs to be executed.
-    jsonObj: {},    
-    jsonPatch: {},
-    newJsonObj: {},
-    objectstring: '',
-    jsonHTML: ''  
+    jsonObj: {}, // Object to store the parsed JSON Input Value;
+    jsonPatch: {}, // Object to store the parsed JSON Input Patch Value;
+    newJsonObj: {}, // Object to store the modified JSON Input Value;    
+    jsonHTML: '' // String to store the Stingified Object to be displayed in HTML. 
   },
 
   watch: {
     jsonHTML: function(value){
       document.getElementById('jsonOutput').innerHTML = value;
+    },
+    // newJsonObj: function(value){
+    //   console.log(value);
+    // }
+    jsonObj: function(value){
+      console.log('Updated Now');
     }
   },
 
-  methods: {
-    formatInput: function(){
+  updated: function(){
+    console.log('DOM Updated');
+  },
+
+  methods: {    
+    formatInput: function(){ // Method Called up submitting User Input to format the user input to JSON Object.
+      console.log('Called');
       if(this.input && this.patch){
-        this.jsonObj = JSON.parse(this.input);   
-        this.jsonPatch = JSON.parse(this.patch);
-        this.newJsonObj = this.jsonObj;
+        this.jsonObj = JSON.parse(this.input); // Assigning the JSON Value;
+        this.jsonPatch = JSON.parse(this.patch);        
+        this.newJsonObj = JSON.parse(this.input); // Assigning a copy of the JSON Value;
       }
     },
 
-    exec: function(){
+    exec: function(){ // Method Called at the time of User Submission.
       this.formatInput();
-      this.jsonPatch.forEach((patch, index) => { 
-        this.executePatch(patch,index)
-      });
+      // this.jsonPatch.forEach((patch, index) => { 
+      //   this.executePatch(patch,index)
+      // });
+      this.updateHTMLOutput(this.jsonObj);
     },
 
-
-    executePatch(patch,index){
+    executePatch(patch,index){ // Method Called to Execute the patches one by one.
       let path = patch.path.split('/');
+
       if(path[0]=== ""){
         path.shift();
       }
@@ -164,39 +177,39 @@ let jsonPatchApp = new Vue({
         }
       }
 
+      let tempObject = this.newJsonObj;
+
       switch(patch.op){
         case 'add':
-          this.setValue(path,patch.value);                
+          this.newJsonObj = this.setValue(path,patch.value,this.newJsonObj);           
           break;
-        case 'remove':
-          let currentVal = this.getValue(path);
-          this.unsetValue(path);
+        case 'remove':           
+          this.jsonPatch[index].previousValue = this.getValue(path);
+          this.newJsonObj = this.unsetValue(path);
           break;
         case 'replace':          
           this.jsonPatch[index].previousValue = this.getValue(path);
-          this.setValue(path,patch.value);
+          this.newJsonObj = this.setValue(path,patch.value,this.newJsonObj);
           break;
         case 'move':
           if(fromPath){
             let currentVal = this.getValue(fromPath);
-            this.unsetValue(fromPath);
-            this.setValue(path,currentVal)
+            if(currentVal !== undefined){
+              this.newJsonObj = this.unsetValue(fromPath);
+              this.newJsonObj = this.setValue(path,currentVal,this.newJsonObj);
+            }
           }
           break;
         case 'copy':
           if(fromPath){
             let currentVal = this.getValue(fromPath);            
-            this.setValue(path,currentVal)
+            this.newJsonObj = this.setValue(path,currentVal,this.newJsonObj)
+            console.log(this.newJsonObj);
           }
           break;
         case 'test':
           break;
-      }
-
-    },
-
-    move: function(patch){
-
+      }      
     },
 
     isJson(string){
@@ -204,21 +217,96 @@ let jsonPatchApp = new Vue({
     },
 
     seeDiff(e,index){
-      // let element = e;
-      // if(element.target.classList.indexOf('operation-item') < 0){
-      //   element = element.target.parentElement;
-      // }
-      // console.log(element.classList);
+      if(index === 0){
+        this.newJsonObj = this.copy(this.jsonObj); // Incase change isn't accepted or rejected, load the previous version of the object.
+        this.executePatch(this.jsonPatch[index],index);
+        let path = this.jsonPatch[index].path.split('/');
+        if(path[0]=== ""){
+          path.shift();
+        }
+        let key = path[path.length - 1];
+        console.log(key);      
+        let value = this.jsonPatch[index].value; 
 
-      let value = this.jsonPatch[index].value;
-      // this.objectstring = this.objectstring.replace(JSON.stringify(value),'<span class="old">' + this.jsonPatch[index].previousValue + '</span><span class="new">' + value + '</span>');
-      this.updateHTMLOutput();
-      this.jsonHTML = this.jsonHTML.replace(
-                        JSON.stringify(value),
-                        '<span class="old">' + 
-                          (this.jsonPatch[index].previousValue !== undefined ? this.jsonPatch[index].previousValue : '')
-                        + '</span> <span class="new">' + value + '</span>'
-                      );
+        this.updateHTMLOutput();
+        let matchText;
+
+        switch(this.jsonPatch[index].op){
+          case 'add':
+            if(isNaN(key)){             
+              matchText = JSON.stringify(key) + ': ' + this.getFormattedString(value);
+            }
+            else{ 
+              matchText = this.getFormattedString(value);
+            }
+
+            if(typeof(this.jsonPatch[index].value) === 'object'){          
+              matchText = matchText.split('<br>');
+              matchText.forEach((match,item) => {              
+                matchText[item] = '&nbsp;'.repeat(path.length * 6) + match;                
+              });
+              matchText = matchText.join('<br>');
+            }
+            
+
+            this.jsonHTML = this.jsonHTML.replace(
+              matchText,'<span class="new">' + matchText + '</span>'
+            );
+            
+
+            console.log(matchText);          
+            break;
+          case 'remove':                   
+            if(isNaN(key)){ matchText = JSON.stringify(key) + ': ' +JSON.stringify(this.jsonPatch[index].previousValue); }
+            else{ matchText = JSON.stringify(this.jsonPatch[index].previousValue); }                    
+            
+            this.updateHTMLOutput(this.jsonObj);                  
+            this.jsonHTML = this.jsonHTML.replace(
+              matchText,'<span class="old">' + matchText + '</span>'
+            );         
+            break;
+          case 'replace':
+            this.jsonHTML = this.jsonHTML.replace(
+              JSON.stringify(value),                      
+                (this.jsonPatch[index].previousValue !== undefined ? '<span class="old">' + this.jsonPatch[index].previousValue + '</span> ' : '')
+              + '<span class="new">' + value + '</span>'
+            );        
+            break;
+          case 'move':
+            if(isNaN(key)){ 
+              matchText = JSON.stringify(key) + ': ' +JSON.stringify(this.jsonPatch[index].previousValue); 
+            }
+            else{ 
+              matchText = JSON.stringify(this.jsonPatch[index].previousValue); 
+            }
+            console.log(matchText);          
+            this.updateHTMLOutput(this.jsonObj);                  
+            this.jsonHTML = this.jsonHTML.replace(
+              matchText,'<span class="old">' + matchText + '</span>'
+            );
+            break;
+          case 'copy':          
+            if(isNaN(key)){ 
+              matchText = JSON.stringify(key) + ': ' +JSON.stringify(this.getValue(path)); 
+            }
+            else{ 
+              matchText = JSON.stringify(this.getValue(path));
+            }          
+            console.log(matchText);          
+            this.updateHTMLOutput(this.newJsonObj);          
+            this.jsonHTML = this.jsonHTML.replace(
+              matchText,'<span class="new">' + matchText + '</span>'
+            );
+            break;
+          case 'test':
+            break;
+        }
+      }
+      else{
+        alert('You should execute the patches in order');
+      }
+      
+      // console.log(this.newJsonObj, this.jsonObj);
     },
 
     getPath(path){
@@ -234,22 +322,24 @@ let jsonPatchApp = new Vue({
       return pathString;
     },    
 
-    setValue(path, value){
-      let exec = 'this.newJsonObj.' + this.getPath(path) + 
-                 '=' + 
-                 (typeof(value) === 'object' ? ('JSON.parse(\'' + JSON.stringify(value) + '\')') : ('\'' + value + '\''));
-      console.log(exec);        
-      eval(exec);
-      // this.objectstring = JSON.stringify(this.newJsonObj,null,2);
-      this.updateHTMLOutput();
+    // Method to add proprerty to the Object 
+    setValue(path, value, newObj){  
+      if(!newObj) newObj = this.newJsonObj; 
+
+      let exec = 'newObj.' + this.getPath(path) + 
+                  '=' + 
+                  (typeof(value) === 'object' ? ('JSON.parse(\'' + JSON.stringify(value) + '\')') : ('\'' + value + '\''));                           
+      eval(exec); 
+      // The Eval function will execute the string command eg. if exec = 'delete Object.value', if will execute the statement.            
+      return newObj;
     },
 
-    unsetValue: function(path){
-      let exec = 'delete this.newJsonObj.' + this.getPath(path);
+    unsetValue: function(path, newObj = null){
+      if(!newObj) newObj = this.newJsonObj;
+      let exec = 'delete newObj.' + this.getPath(path);
       console.log(exec);
-      eval(exec);
-      // this.objectstring = JSON.stringify(this.newJsonObj,null,2);  
-      this.updateHTMLOutput();   
+      eval(exec);            
+      return newObj;      
     },
 
     getValue(path){
@@ -268,21 +358,21 @@ let jsonPatchApp = new Vue({
         this.setValue(path,value);
       }
       else{        
-        this.updateHTMLOutput();
+        this.updateHTMLOutput(this.newJsonObj);
       }
-
       this.jsonPatch.splice(index,1);
-
+      this.jsonObj = this.copy(this.newJsonObj);
+      this.updateHTMLOutput();
     },
 
 
-    reject(index){
+    reject(index){      
       let value = this.jsonPatch[index].previousValue;
       let path = this.jsonPatch[index].path.split('/');
       if(path[0]=== ""){
         path.shift();
       }
-      
+            
       if(this.getValue(path) !== value){
         console.log('Here');
         if(value === undefined){
@@ -294,18 +384,55 @@ let jsonPatchApp = new Vue({
       }
       else{
         console.log('Here roo');
-        this.updateHTMLOutput();
+        this.updateHTMLOutput(this.newJsonObj);
       }
 
       this.jsonPatch.splice(index,1);
+      this.newJsonObj = this.copy(this.jsonObj);
+      this.updateHTMLOutput();
     },
 
-    updateHTMLOutput(){
-      this.jsonHTML = JSON.stringify(this.newJsonObj, null, 6)
+    updateHTMLOutput(obj = null){
+      if(!obj) obj = this.newJsonObj;
+
+      function replacer(key, value) { 
+        // console.log(key,isNaN(key),value);                
+        if(isNaN(key)){                  
+          return value;
+        }
+        else{
+          if(key === ''){
+            return value;
+          }
+          else{
+            if(typeof value === 'object'){
+              return value;
+            }
+            else{              
+              return value;
+            }
+          }
+        }
+      }
+
+      this.jsonHTML = JSON.stringify(obj, replacer, 6)
                         .replace(/\n( *)/g, function (match, p1) {
-                        return '<br>' + '&nbsp;'.repeat(p1.length);
-                      });
+                          return '<br>' + '&nbsp;'.repeat(p1.length);
+                        });
+    },
+
+    copy(o){
+      return JSON.parse(JSON.stringify(o));
+    },
+        
+
+    getFormattedString(o){
+      return JSON.stringify(o,undefined,6)
+              .replace(/\n( *)/g, function (match, p1) {
+                return '<br>' +  '&nbsp;'.repeat(p1.length);
+              });
     }
 
   }
 })
+

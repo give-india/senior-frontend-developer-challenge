@@ -23,13 +23,18 @@
         <textarea v-model="patch" resizable="false">            
         </textarea>
       </div>
+    </div>    
+    <div class="buttonContainer">
+      <button class="update" v-on:click="exec">Review Patch</button>
     </div>
-    <button class="update" v-on:click="exec">Execute Patch</button>
     <div class="outputContainer">
       <div class="operations">
-        <div v-for="(patch,index) in jsonPatch" class="operation-item" key="index" v-on:click="e => seeDiff(e,index)">
+        <p>Click on the Patches below to execute, then take actions</p>
+        <div v-for="(patch,index) in jsonPatch" class="operation-item" key="index" v-on:click="e => seeDiff(e,index)" >
           <!-- @mouseover="seeDiff(index)" -->
+          <!-- @mouseover="e => seeDiff(e,index)" -->
           <h5>Operation: {{patch.op}}</h5>
+          <p v-if="patch.from">From: {{patch.from}}</p>
           <p>Path: {{patch.path}}</p>
           <p v-if="patch.value">Value: {{patch.value}}</p>
           <button class="action" v-on:click="accept(index)">Accept</button>  <button class="action reject" v-on:click="reject(index)">Reject</button>
