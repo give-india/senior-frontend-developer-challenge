@@ -9,25 +9,25 @@
 <body>
 
   <div id="jsonPatchApp">
-    <h3>Verify and Approve Changes</h3>
+    <h3 class='title'>Verify and Approve Changes</h3>
 
     <div class="inputContainer">
       <div class="inputBox">
         <p>JSON Object {}</p>
-        <textarea v-model="input">
+        <textarea v-model="input" resizable="false">
           
         </textarea>
       </div>
       <div class="inputBox">
         <p>JSON Patch File {}</p>
-        <textarea v-model="patch">            
+        <textarea v-model="patch" resizable="false">            
         </textarea>
       </div>
     </div>
     <button class="update" v-on:click="exec">Execute Patch</button>
     <div class="outputContainer">
       <div class="operations">
-        <div v-for="(patch,index) in jsonPatch" class="operation-item" key="index" v-on:click="seeDiff(index)">
+        <div v-for="(patch,index) in jsonPatch" class="operation-item" key="index" v-on:click="e => seeDiff(e,index)">
           <!-- @mouseover="seeDiff(index)" -->
           <h5>Operation: {{patch.op}}</h5>
           <p>Path: {{patch.path}}</p>
@@ -36,6 +36,7 @@
         </div>
       </div>
       <div class="output">
+        <div class="codeLang">JSON</div>
         <!-- <pre>   
           <code>                     
 {{objectstring}}

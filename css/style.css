@@ -4,16 +4,28 @@ html,body{
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.inputContainer{
+h3.title{
   width: 100%;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  background: #37474F;
+  color: #FFF;
+  position: fixed;
+  margin-top: 0px;  
+}
+
+.inputContainer{
+  width: 100%;  
   display: flex;
-  flex-direction: row;
+  padding-top: 60px;
+  flex-direction: row;  
 }
 
 .outputContainer{
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: row;  
 }
 
 .inputBox{
@@ -23,20 +35,44 @@ html,body{
 .operations{
   width: 30%;
   padding: 10px;
+  /* height: 50vh;
+  overflow-y: scroll; */
+  background: #90A4AE;
 }
 
 .output{
   width: 70%;  
-  padding: 10px
+  padding: 10px;
+  /* height: 50vh;
+  overflow-y: scroll; */
+  background: #263238;
+  color: #FFF;
+}
+
+.codeLang{
+  width: 40px;  
+  height: 20px;
+  padding: 5px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 15px;
+  float: right;
+  text-align: center;
+  margin: -10px -10px 0 0;
+  background: #009688;  
 }
 
 .operation-item{
-  width: 100%;
+  width: calc(100% - 10px);
   margin-bottom: 20px;
   border-radius: 4px;  
   background: #FAFAFA;
   cursor: pointer;
   padding: 5px;
+}
+
+.operation-item:hover{
+  background: #FFC107;
+  color: #FFF;
 }
 
 .operation-item h5, .operation-item p{
@@ -45,17 +81,19 @@ html,body{
 }
 
 .inputBox textarea{
-  width: 100%;
+  width: calc(100% - 24px);
   height: 40vh;
+  padding: 10px;
+  resize: none;
 }
 
 span.new{
-  background: #C5E1A5;  
+  background: #388E3C;  
   
 }
 
 span.old{
-  background: #ef9a9a;
+  background: #d32f2f;
   text-decoration: line-through;  
 }
 

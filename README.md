@@ -139,3 +139,8 @@ Hovering on each of the change should allow the user to accept or reject the cha
 - Include instructions on how to set it up and run in the [README.md](README.md)
 - Add your resume and other profile / project links
 - Submit a pull request (PR)
+
+
+# Project Setup
+
+

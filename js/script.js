@@ -203,9 +203,16 @@ let jsonPatchApp = new Vue({
 
     },
 
-    seeDiff(index){
+    seeDiff(e,index){
+      // let element = e;
+      // if(element.target.classList.indexOf('operation-item') < 0){
+      //   element = element.target.parentElement;
+      // }
+      // console.log(element.classList);
+
       let value = this.jsonPatch[index].value;
       // this.objectstring = this.objectstring.replace(JSON.stringify(value),'<span class="old">' + this.jsonPatch[index].previousValue + '</span><span class="new">' + value + '</span>');
+      this.updateHTMLOutput();
       this.jsonHTML = this.jsonHTML.replace(
                         JSON.stringify(value),
                         '<span class="old">' + 
@@ -257,12 +264,10 @@ let jsonPatchApp = new Vue({
         path.shift();
       }
       
-      if(this.getValue(path) !== value){
-        console.log('Here');
+      if(this.getValue(path) !== value){        
         this.setValue(path,value);
       }
-      else{
-        console.log('Here roo');
+      else{        
         this.updateHTMLOutput();
       }
 
