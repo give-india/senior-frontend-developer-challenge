@@ -50,5 +50,37 @@ html,body{
 }
 
 span.new{
-  color: red;
+  background: #C5E1A5;  
+  
+}
+
+span.old{
+  background: #ef9a9a;
+  text-decoration: line-through;  
+}
+
+button.action{
+  background: #689F38;
+  border: none;
+  outline: 0;  
+  padding: 3px 10px;
+  cursor: pointer;
+}
+
+p#jsonOutput{
+  font-family: 'Courier New', Courier, monospace;
+}
+
+button.update{
+  background: #00796B;
+  border: none;
+  outline: 0;  
+  padding: 7px 10px;
+  cursor: pointer;
+  color: #FFF;  
+}
+
+button.action.reject{
+  background: #d32f2f;  
+  color: #FFF;
 }

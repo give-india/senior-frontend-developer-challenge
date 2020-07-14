@@ -31,14 +31,18 @@
           <!-- @mouseover="seeDiff(index)" -->
           <h5>Operation: {{patch.op}}</h5>
           <p>Path: {{patch.path}}</p>
-          <p>Value: {{patch.value}}</p>
-          <button class="action" v-on:click="accept(index)">Accept</button> | <button class="action" v-on:click="reject(index)">Reject</button>
+          <p v-if="patch.value">Value: {{patch.value}}</p>
+          <button class="action" v-on:click="accept(index)">Accept</button>  <button class="action reject" v-on:click="reject(index)">Reject</button>
         </div>
       </div>
       <div class="output">
-        <pre>   
-{{objectstring}}          
-        </pre>
+        <!-- <pre>   
+          <code>                     
+{{objectstring}}
+          </code>          
+        </pre> -->
+        <p id="jsonOutput">                                            
+        </p>
       </div>      
     </div>
   </div>
