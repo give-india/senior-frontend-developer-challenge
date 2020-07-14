@@ -141,6 +141,36 @@ Hovering on each of the change should allow the user to accept or reject the cha
 - Submit a pull request (PR)
 
 
-# Project Setup
+# Usage
 
+### Frameworks in Use
 
+- [Vue.JS](https://vuejs.org/)
+
+### Project Setup
+
+- Clone the Respository to your local System/Server.
+```
+  git clone git@github.com:rhit99900/senior-frontend-developer-challenge.git [folder_name]
+```
+- Go to your browser and open the index.html file.
+Eg. For the current mentioned structure,
+```
+- WebServer (/var/www or /Documents/WebServer or /htdocs)
+--| dev
+---| senior-frontend-developer-challenge
+----| index.html
+----| js
+-----| script.js
+----| css
+-----| style.css
+----| README.md
+```
+run ```localhost/dev/<folder_name>/``` or ```localhost/dev/<folder_name>/index.html```
+
+### Developer Profile
+
+Name: Rohit Nair | rohitcse081@gmail.com
+
+- [Linked In](https://www.linkedin.com/in/rohit-s-nair-51218999/)
+- [GitHub](https://github.com/rhit99900)
