@@ -177,6 +177,8 @@ Name: Rohit Nair | rohitcse081@gmail.com
 
 ### How Does it work?
 
+![UI](./screenshot.png)
+
 - Enter the Base JSON Object that needs to be updated.
 - Enter the JSON Patch that needs to operated.
 - The User will get a list of operations on the screen
