@@ -1,133 +1,133 @@
 let jsonPatchApp = new Vue({
   el: '#jsonPatchApp',
   data: {    
-    // input: null, // Input Text of JSON Object that needs to be modified.
+    input: null, // Input Text of JSON Object that needs to be modified.
 
     // Sample JSON Text Input for Input Object
-    input: '{' + '\n' + 
-      '"slug": "diya-foundation",' + '\n' + 
-      '"name": "Diya Foundation",' + '\n' + 
-      '"registration_number": "386/98-99",' + '\n' + 
-      '"auditor_name": "Das Kumar And Company",' + '\n' + 
-      '"created_at": "2013-02-08T09:28:51.000Z",' + '\n' + 
-      '"updated_at": "2020-02-25T06:11:35.814Z",' + '\n' + 
-      '"external_profiles": [{' + '\n' + 
-      '"label": "Website",' + '\n' + 
-      '"uri": "http://www.diyafoundation-india.org/Site/index.html"' + '\n' + 
-      '}, {' + '\n' + 
-      '"label": "Youtube",' + '\n' + 
-      '"uri": "http://www.youtube.com/watch?v=DezbmReWMf0"' + '\n' + 
-      '}],' + '\n' + 
-      '"tags": ["hoh18", "lfc19", "tbpp", "housie19", "gfc2020", "housie18"]' + '\n' + 
-    '}',            
+    // input: '{' + '\n' + 
+    //   '"slug": "diya-foundation",' + '\n' + 
+    //   '"name": "Diya Foundation",' + '\n' + 
+    //   '"registration_number": "386/98-99",' + '\n' + 
+    //   '"auditor_name": "Das Kumar And Company",' + '\n' + 
+    //   '"created_at": "2013-02-08T09:28:51.000Z",' + '\n' + 
+    //   '"updated_at": "2020-02-25T06:11:35.814Z",' + '\n' + 
+    //   '"external_profiles": [{' + '\n' + 
+    //   '"label": "Website",' + '\n' + 
+    //   '"uri": "http://www.diyafoundation-india.org/Site/index.html"' + '\n' + 
+    //   '}, {' + '\n' + 
+    //   '"label": "Youtube",' + '\n' + 
+    //   '"uri": "http://www.youtube.com/watch?v=DezbmReWMf0"' + '\n' + 
+    //   '}],' + '\n' + 
+    //   '"tags": ["hoh18", "lfc19", "tbpp", "housie19", "gfc2020", "housie18"]' + '\n' + 
+    // '}',            
     
-    // patch: null, // Input Text of JSON Patch that needs to be executed.
+    patch: null, // Input Text of JSON Patch that needs to be executed.
 
     // Sample JSON Text Input for Patch
-    patch: '[' + '\n' +  
-    '  {' + '\n' +
-    '      "op": "replace",' + '\n' +
-    '      "path": "/tags/5",' + '\n' +
-    '      "value": "spbm18"' + '\n' +
-    '  },' + '\n' +
-    '  {' + '\n' +
-    '      "op": "replace",' + '\n' +
-    '      "path": "/tags/4",' + '\n' +
-    '      "value": "bengaluru10k-18"' + '\n' +
-    '  },' + '\n' +
-    '  {' + '\n' +
-    '      "op": "replace",' + '\n' +
-    '      "path": "/tags/3",' + '\n' +
-    '      "value": "lfc18-wow2"' + '\n' +
-    '  },' + '\n' +
-    '  {' + '\n' +
-    '      "op": "replace",' + '\n' +
-    '      "path": "/tags/2",' + '\n' +
-    '      "value": "tcs10k-18"' + '\n' +
-    '  },' + '\n' +
-    '  {' + '\n' +
-    '      "op": "replace",' + '\n' +
-    '      "path": "/tags/1",' + '\n' +
-    '      "value": "lfc18-cbp"' + '\n' +
-    '  },' + '\n' +
-    '  {' + '\n' +
-    '      "op": "replace",' + '\n' +
-    '      "path": "/tags/0",' + '\n' +
-    '      "value": "lfc18"' + '\n' +
-    '  },' + '\n' +
-    '  {' + '\n' +
-    '      "op": "add",' + '\n' +
-    '      "path": "/tags/6",' + '\n' +
-    '      "value": "housie18"' + '\n' +
-    '  },' + '\n' +
-    '  {' + '\n' +
-    '      "op": "add",' + '\n' +
-    '      "path": "/tags/7",' + '\n' +
-    '      "value": "hoh18"' + '\n' +
-    '  },' + '\n' +
-    '  {' + '\n' +
-    '      "op": "add",' + '\n' +
-    '      "path": "/tags/8",' + '\n' +
-    '      "value": "lfc19"' + '\n' +
-    '  },' + '\n' +
-    '  {' + '\n' +
-    '      "op": "add",' + '\n' +
-    '      "path": "/tags/9",' + '\n' +
-    '      "value": "tbpp"' + '\n' +
-    '  },' + '\n' +
-    '  {' + '\n' +
-    '      "op": "add",' + '\n' +
-    '      "path": "/tags/10",' + '\n' +
-    '      "value": "housie19"' + '\n' +
-    '  },' + '\n' +
-    '  {' + '\n' +
-    '      "op": "add",' + '\n' +
-    '      "path": "/tags/11",' + '\n' +
-    '      "value": "gfc2020"' + '\n' +
-    '  },' + '\n' +
-    '  {' + '\n' +
-    '      "op": "replace",' + '\n' +
-    '      "path": "/external_profiles/1/uri",' + '\n' +
-    '      "value": "https://www.facebook.com/pages/DIYA-Foundation/"' + '\n' +
-    '  },' + '\n' +
-    '  {' + '\n' +
-    '      "op": "replace",' + '\n' +
-    '      "path": "/external_profiles/1/label",' + '\n' +
-    '      "value": "Facebook"' + '\n' +
-    '  },' + '\n' +
-    '  {' + '\n' +
-    '      "op": "add",' + '\n' +
-    '      "path": "/external_profiles/2",' + '\n' +
-    '      "value": {' + '\n' +
-    '          "label": "Youtube",' + '\n' +
-    '          "uri": "http://www.youtube.com/watch?v=DezbmReWMf0"' + '\n' +
-    '      }' + '\n' +
-    '  },' + '\n' +
-    '  {' + '\n' +
-    '      "op": "add",' + '\n' +
-    '      "path": "/official_name",' + '\n' +
-    '      "value": "Diya Foundation"' + '\n' +
-    '  },' + '\n' +
-    '  {' + '\n' +
-    '      "op": "remove",' + '\n' +
-    '      "path": "/slug"' + '\n' +
-    '  },' + '\n' +
-    '  {' + '\n' +
-    '      "op": "move",' + '\n' +
-    '      "from": "/auditor_name",' + '\n' +
-    '      "path": "/external_profiles/3"' + '\n' +
-    '  },' + '\n' +
-    '  {' + '\n' +
-    '      "op": "test",' + '\n' +
-    '      "path": "/official_name",' + '\n' +
-    '      "value": "Diya Foundations"' + '\n' +
-    '  },' + '\n' +
-    '  {' + '\n' +
-    '      "op": "copy",' + '\n' +
-    '      "from": "/registration_number",' + '\n' +
-    '      "path": "/external_profiles/4"' + '\n' +
-    '  }' + '\n' +    
-    ']',   
+    // patch: '[' + '\n' +  
+    // '  {' + '\n' +
+    // '      "op": "replace",' + '\n' +
+    // '      "path": "/tags/5",' + '\n' +
+    // '      "value": "spbm18"' + '\n' +
+    // '  },' + '\n' +
+    // '  {' + '\n' +
+    // '      "op": "replace",' + '\n' +
+    // '      "path": "/tags/4",' + '\n' +
+    // '      "value": "bengaluru10k-18"' + '\n' +
+    // '  },' + '\n' +
+    // '  {' + '\n' +
+    // '      "op": "replace",' + '\n' +
+    // '      "path": "/tags/3",' + '\n' +
+    // '      "value": "lfc18-wow2"' + '\n' +
+    // '  },' + '\n' +
+    // '  {' + '\n' +
+    // '      "op": "replace",' + '\n' +
+    // '      "path": "/tags/2",' + '\n' +
+    // '      "value": "tcs10k-18"' + '\n' +
+    // '  },' + '\n' +
+    // '  {' + '\n' +
+    // '      "op": "replace",' + '\n' +
+    // '      "path": "/tags/1",' + '\n' +
+    // '      "value": "lfc18-cbp"' + '\n' +
+    // '  },' + '\n' +
+    // '  {' + '\n' +
+    // '      "op": "replace",' + '\n' +
+    // '      "path": "/tags/0",' + '\n' +
+    // '      "value": "lfc18"' + '\n' +
+    // '  },' + '\n' +
+    // '  {' + '\n' +
+    // '      "op": "add",' + '\n' +
+    // '      "path": "/tags/6",' + '\n' +
+    // '      "value": "housie18"' + '\n' +
+    // '  },' + '\n' +
+    // '  {' + '\n' +
+    // '      "op": "add",' + '\n' +
+    // '      "path": "/tags/7",' + '\n' +
+    // '      "value": "hoh18"' + '\n' +
+    // '  },' + '\n' +
+    // '  {' + '\n' +
+    // '      "op": "add",' + '\n' +
+    // '      "path": "/tags/8",' + '\n' +
+    // '      "value": "lfc19"' + '\n' +
+    // '  },' + '\n' +
+    // '  {' + '\n' +
+    // '      "op": "add",' + '\n' +
+    // '      "path": "/tags/9",' + '\n' +
+    // '      "value": "tbpp"' + '\n' +
+    // '  },' + '\n' +
+    // '  {' + '\n' +
+    // '      "op": "add",' + '\n' +
+    // '      "path": "/tags/10",' + '\n' +
+    // '      "value": "housie19"' + '\n' +
+    // '  },' + '\n' +
+    // '  {' + '\n' +
+    // '      "op": "add",' + '\n' +
+    // '      "path": "/tags/11",' + '\n' +
+    // '      "value": "gfc2020"' + '\n' +
+    // '  },' + '\n' +
+    // '  {' + '\n' +
+    // '      "op": "replace",' + '\n' +
+    // '      "path": "/external_profiles/1/uri",' + '\n' +
+    // '      "value": "https://www.facebook.com/pages/DIYA-Foundation/"' + '\n' +
+    // '  },' + '\n' +
+    // '  {' + '\n' +
+    // '      "op": "replace",' + '\n' +
+    // '      "path": "/external_profiles/1/label",' + '\n' +
+    // '      "value": "Facebook"' + '\n' +
+    // '  },' + '\n' +
+    // '  {' + '\n' +
+    // '      "op": "add",' + '\n' +
+    // '      "path": "/external_profiles/2",' + '\n' +
+    // '      "value": {' + '\n' +
+    // '          "label": "Youtube",' + '\n' +
+    // '          "uri": "http://www.youtube.com/watch?v=DezbmReWMf0"' + '\n' +
+    // '      }' + '\n' +
+    // '  },' + '\n' +
+    // '  {' + '\n' +
+    // '      "op": "add",' + '\n' +
+    // '      "path": "/official_name",' + '\n' +
+    // '      "value": "Diya Foundation"' + '\n' +
+    // '  },' + '\n' +
+    // '  {' + '\n' +
+    // '      "op": "remove",' + '\n' +
+    // '      "path": "/slug"' + '\n' +
+    // '  },' + '\n' +
+    // '  {' + '\n' +
+    // '      "op": "move",' + '\n' +
+    // '      "from": "/auditor_name",' + '\n' +
+    // '      "path": "/external_profiles/3"' + '\n' +
+    // '  },' + '\n' +
+    // '  {' + '\n' +
+    // '      "op": "test",' + '\n' +
+    // '      "path": "/official_name",' + '\n' +
+    // '      "value": "Diya Foundations"' + '\n' +
+    // '  },' + '\n' +
+    // '  {' + '\n' +
+    // '      "op": "copy",' + '\n' +
+    // '      "from": "/registration_number",' + '\n' +
+    // '      "path": "/external_profiles/4"' + '\n' +
+    // '  }' + '\n' +    
+    // ']',   
 
     jsonObj: {}, // Object to store the parsed JSON Input Value;
     jsonPatch: {}, // Object to store the parsed JSON Input Patch Value;
@@ -347,7 +347,7 @@ let jsonPatchApp = new Vue({
     getPath(path){ // Get the JSON patch string from the array of Path. eg [a,b,c,1] should return a.b.c[1];
       let pathString = path[0];
       for(let i=1;i< path.length;i++){
-        if(isNaN(path[i])){
+        if(isNaN(path[i]) && (path[i].indexOf('-') < 0 || path[i].indexOf(' ') < 0)){
           pathString += '.' + path[i];
         }
         else{
