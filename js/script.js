@@ -267,14 +267,8 @@ let jsonPatchApp = new Vue({
       let matchText; // Initialising text to match.
 
       switch(this.jsonPatch[index].op){
-        case 'add':
-
-          if(isNaN(key)){
-            matchText = JSON.stringify(key) + ': ' + this.getFormattedString(value); // Compare string for a non-array value
-          }
-          else{ 
-            matchText = this.getFormattedString(value); // Compare string for a array value
-          }
+        case 'add':          
+          matchText = JSON.stringify(key) + ': ' + this.getFormattedString(value); // Compare string for a non-array value          
 
           if(typeof(this.jsonPatch[index].value) === 'object'){ 
             // If the value added is an Object, formatting the string that could be searched 
@@ -287,17 +281,11 @@ let jsonPatchApp = new Vue({
           
           this.jsonHTML = this.jsonHTML.replace( // Displaying the change using CSS
             matchText,'<span class="new">' + matchText + '</span>'
-          );
-                            
+          );                            
           break;
 
-        case 'remove':             
-          if(isNaN(key)){ 
-            matchText = JSON.stringify(key) + ': ' +JSON.stringify(this.jsonPatch[index].previousValue); 
-          }
-          else{ 
-            matchText = JSON.stringify(this.jsonPatch[index].previousValue); 
-          }                    
+        case 'remove':                       
+          matchText = JSON.stringify(key) + ': ' + this.getFormattedString(this.jsonPatch[index].previousValue); 
           
           this.updateHTMLOutput(this.jsonObj); // Temporarily updating the DOM with formatted Object before change to display the change.
           this.jsonHTML = this.jsonHTML.replace( // Displaying the change using CSS
@@ -316,34 +304,36 @@ let jsonPatchApp = new Vue({
           let tempObj = this.copy(this.jsonObj);
 
           tempObj = this.setValue(path,this.getValue(fromPath,tempObj),tempObj);      
-          this.updateHTMLOutput(tempObj);                  
+          this.updateHTMLOutput(tempObj);                            
+          let movedValue = this.getValue(fromPath,this.jsonObj)
 
-          if(isNaN(key)){
-            matchText = JSON.stringify(fromKey) + ': ' +JSON.stringify(this.getValue(fromPath,this.jsonObj)); 
-          }
-          else{ 
-            matchText = JSON.stringify(this.getValue(fromPath,this.jsonObj)); 
-          }
-
-          console.log(matchText);
+          matchText = JSON.stringify(fromKey) + ': ' + this.getFormattedString(movedValue);
+          let movedText = JSON.stringify(key)  + ': ' + this.getFormattedString(movedValue)
 
           this.jsonHTML = this.jsonHTML.replace(
             matchText,'<span class="old">' + matchText + '</span>'
           );
+
+          this.jsonHTML = this.jsonHTML.replace(
+            movedText, '<span class="new">' + movedText + '</span>'
+          );
           break;
         case 'copy':      
-          fromKey = fromPath[fromPath.length - 1];   
-          if(isNaN(fromKey)){ 
-            matchText = JSON.stringify(fromKey) + ': ' +JSON.stringify(this.getValue(fromPath,this.newJsonObj)); 
-          }
-          else{ 
-            matchText = JSON.stringify(this.getValue(fromPath,this.newJsonObj)); 
-          }          
+          fromKey = fromPath[fromPath.length - 1];
 
+          let copiedValue = this.getValue(fromPath,this.newJsonObj);
+          matchText = JSON.stringify(fromKey) + ': ' + this.getFormattedString(copiedValue);
+          let copiedText = JSON.stringify(key) + ': ' + this.getFormattedString(copiedValue);
           this.updateHTMLOutput(this.newJsonObj);                   
+          
           this.jsonHTML = this.jsonHTML.replace(
-            matchText,'<span class="new">' + matchText + '</span>'
+            matchText,'<span class="copied">' + matchText + '</span>'
           );
+
+          this.jsonHTML = this.jsonHTML.replace(
+            copiedText,'<span class="new">' + copiedText + '</span>'
+          );
+
           break;
         case 'test':
           break;
@@ -381,11 +371,10 @@ let jsonPatchApp = new Vue({
 
     // setValue(path, value, newObj){  
     //   if(!newObj) newObj = this.newJsonObj; 
-    //   if(path.length === 1){
-    //     newObj.pa
-    //   }
-      
-    //   newObj[path.length-1] = value;      
+    //   for(let i=0;i < path.length - 1; i++){
+    //     newObj = newObj[path[i]];
+    //   }    
+    //   newObj[path[path.length - 1]] = value;      
     // },
 
     // Method to delete propery from the object.
@@ -442,22 +431,12 @@ let jsonPatchApp = new Vue({
       if(!obj) obj = this.newJsonObj;
 
       function replacer(key, value) { 
-        // console.log(key,isNaN(key),value);                
-        if(isNaN(key)){                  
-          return value;
+        console.log(key,isNaN(key),Array.isArray(value));            
+        if(Array.isArray(value)){
+          return Object.assign({},value);
         }
         else{
-          if(key === ''){
-            return value;
-          }
-          else{
-            if(typeof value === 'object'){
-              return value;
-            }
-            else{              
-              return value;
-            }
-          }
+          return value;
         }
       }
 

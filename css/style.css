@@ -114,8 +114,11 @@ h3.title{
 }
 
 span.new{
-  background: #388E3C;  
-  
+  background: #388E3C;    
+}
+
+span.copied{
+  background: #FFC107;
 }
 
 span.old{
