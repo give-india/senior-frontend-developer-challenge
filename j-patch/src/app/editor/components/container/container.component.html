@@ -1,0 +1,18 @@
+<section class="editor-container">
+
+  <article class="editor">
+    <h4>Base Object</h4>
+    <json-editor [options]="editorOptions" [data]="baseObj" (change)="getData($event)"></json-editor>
+  </article>
+
+  <article class="editor">
+    <h4>Patch Object</h4>
+    <json-editor [options]="editorOptions" [data]="patchObj" (change)="getData($event)"></json-editor>
+  </article>
+</section>
+
+<button (click)="doCompare()">Compare</button>
+
+<section>
+  <div [innerHtml]="delta" (mouseover)="onMouseOver($event)" (mouseout)="onMouseOut($event)"></div>
+</section>
