@@ -70,6 +70,7 @@ Successfully incorporated InstaGrade (bit image capturing module) into the Sabio
 Bing map integration 
 Expertise in D3.js/amCharts for data visualisations. 
 Got good user feedback for implementing visualisation export features for customer presentations.
+
 RapidValue Solutions, Cochin— Senior Software Engineer
 January 2014 - September 2019
 
