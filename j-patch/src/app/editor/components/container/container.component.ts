@@ -18,10 +18,6 @@ export class ContainerComponent implements OnInit {
 
   public baseObj: any = BaseObj;
   public patchObj: any[] = PatchObj;
-
-  // public baseObj: any = null;
-  // public patchObj: any[] = null;
-
   public delta: any = null;
 
   public editorOptions1: JsonEditorOptions;
