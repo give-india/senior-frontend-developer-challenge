@@ -3,23 +3,22 @@
    This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.7.
    Please find the Project setup and other details below.
 
-### Installation
+### Project Setup
+    
     Install Angular CLI globally.
 
+      *npm install -g @angular/cli
+    
+    Clone the source code from git rpository to a local folder.
     
 
-    npm install -g @angular/cli
-    
-    * Clone the git url to a local folder
-    
-
-    cd j-patch
-    npm install
+      *cd j-patch
+      *npm install
 
     
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
 ### Example Scenario
 **Base Object**
