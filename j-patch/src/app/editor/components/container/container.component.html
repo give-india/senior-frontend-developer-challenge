@@ -21,8 +21,12 @@
 
 </section>
 
-<div [style.top.px]="position.y" [style.left.px]="position.x" class="confirm-popup" #confirm [hidden]="!showPopup">
+<div [style.top.px]="position.y" [style.left.px]="position.x" class="confirm-popup" #confirm *ngIf="showPopup">
+
   <p>Accept changes ?</p>
-  <button (click)=onAccept(true)>Yes</button>
-  <button (click)=onAccept(false)>No</button>
+  <article class="btn-grid">
+    <button class="cancel" (click)=onAccept(false)>No</button>
+    <button (click)=onAccept(true)>Yes</button>
+  </article>
+
 </div>

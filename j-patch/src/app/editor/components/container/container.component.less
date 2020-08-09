@@ -1,6 +1,6 @@
 .container {
     padding   : 15px;
-    background: #f5f5f5;
+    background: #F3F5F6;
 
 }
 
@@ -30,13 +30,40 @@ json-editor {
 }
 
 .confirm-popup {
-    position  : absolute;
-    top       : 60%;
-    left      : 50%;
-    z-index   : 10;
-    background: grey;
+    position       : absolute;
+    top            : 60%;
+    left           : 50%;
+    z-index        : 10;
+    background     : #e5e5e5;
+    padding        : 10px;
+    width          : 225px;
+    margin         : 0 auto;
+    text-align     : center;
+    border-radius  : 3px;
+    color          : #b12424;
+    display        : flex;
+    flex-direction : column;
+    justify-content: space-around;
+}
+
+.btn-grid {
+    display        : flex;
+    justify-content: flex-end;
+}
+
+.confirm-popup button {
+    width     : 60px;
+    border    : 0;
+    height    : 27px;
+    background: #8FD5F5;
     color     : white;
-    padding   : 20px;
+    margin    : 5px;
+    cursor: pointer;
+}
+
+
+.confirm-popup button.cancel {
+    background: #ccc;
 }
 
 .delta {
