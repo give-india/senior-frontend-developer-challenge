@@ -15,18 +15,24 @@
       *npm install
 
     
-## Development server
+### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
-### Resume
+## Resume
 
 Front end developer with 6+ years of experience in the IT industry. Experience in building web and hybrid mobile applications for major clients. Goal Oriented, highly motivated Team player with excellent interpersonal skills. Currently, working as Software Engineer with Baker Hughes. History of onsite experience in Bahrain and USA.
 (91) 9567661847
 (91) 8848287743
 pjosesujith@gmail.com
 
-# RECOGNITIONS
+### SKILLS
+
+Angular, JavaScript, Ionic,
+TypeScript, angularjs, D3.js,
+amCharts, Bing Maps, HTML5, CSS3, Oracle MAF
+
+### RECOGNITIONS
 
 Best digital product under OFS:   Drilling Insights – 2019 Baker Hughes
 
@@ -36,7 +42,7 @@ Employee of the Quarter                         :   Q3 2015 - RapidValue Solutio
 
 Oracle Mobile Innovation Award:   Vehicle Checklist 2015 – RapidValue Solutions.
 
-## EXPERIENCE & PROJECTS
+#### EXPERIENCE & PROJECTS
 Baker Hughes, Cochin— Software Engineer
 February 2019 - PRESENT
 
@@ -81,21 +87,12 @@ Developed custom components like dent marking and signature drawing.
 Image upload to SharePoint. 
 Oracle Mobile Innovation award 
 
-# EDUCATION
+**EDUCATION**
 College of Engineering Adoor, Adoor— B.Tech Computer Science
 2008 - 2012
 
-
-SKILLS
-
-Angular, JavaScript, Ionic,
-TypeScript, angularjs, D3.js,
-amCharts, Bing Maps, HTML5, CSS3, Oracle MAF
-AWARDS
-
-LANGUAGES
+**LANGUAGES**
 English, Malayalam
-
 
 
 
