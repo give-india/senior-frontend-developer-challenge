@@ -5,9 +5,9 @@
    
 ### Project Setup
 
-* To install Angular on your local system, you need the following: More details can be found from this https://angular.io/guide/setup-local link.
-  ** Node.js
-  ** npm package manager
+* To install Angular on your local system, you need the following: More details can be found from this https://angular.io/guide/setup-local official guide.
+  - Node.js
+  - npm package manager
 
 * Install Angular CLI globally.
 
