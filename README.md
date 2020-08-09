@@ -100,11 +100,11 @@ Developed custom components like dent marking and signature drawing.
 Image upload to SharePoint. 
 Oracle Mobile Innovation award 
 
-**EDUCATION**
+**EDUCATION**   
 College of Engineering Adoor, Adoor— B.Tech Computer Science
 2008 - 2012
 
-**LANGUAGES**
+**LANGUAGES**   
 English, Malayalam
 
 
