@@ -7,10 +7,9 @@
     
     Install Angular CLI globally.
 
-      *npm install -g @angular/cli
+      `npm install -g @angular/cli`
     
-    Clone the source code from git rpository to a local folder.
-    
+    Clone the source code from git repository to a local folder.
 
       *cd j-patch
       *npm install
@@ -20,119 +19,11 @@
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
-### Example Scenario
-**Base Object**
-```js
-{
-"slug": "diya-foundation",
-"name": "Diya Foundation",
-"registration_number": "386/98-99",
-"auditor_name": "Das Kumar And Company",
-"created_at": "2013-02-08T09:28:51.000Z",
-"updated_at": "2020-02-25T06:11:35.814Z",
-"external_profiles": [{
-"label": "Website",
-"uri": "http://www.diyafoundation-india.org/Site/index.html"
-}, {
-"label": "Youtube",
-"uri": "http://www.youtube.com/watch?v=DezbmReWMf0"
-}],
-"tags": ["hoh18", "lfc19", "tbpp", "housie19", "gfc2020", "housie18"]
-}
-```
 
-**JSON Patch**
-```js
-[
-    {
-        "op": "replace",
-        "path": "/tags/5",
-        "value": "spbm18"
-    },
-    {
-        "op": "replace",
-        "path": "/tags/4",
-        "value": "bengaluru10k-18"
-    },
-    {
-        "op": "replace",
-        "path": "/tags/3",
-        "value": "lfc18-wow2"
-    },
-    {
-        "op": "replace",
-        "path": "/tags/2",
-        "value": "tcs10k-18"
-    },
-    {
-        "op": "replace",
-        "path": "/tags/1",
-        "value": "lfc18-cbp"
-    },
-    {
-        "op": "replace",
-        "path": "/tags/0",
-        "value": "lfc18"
-    },
-    {
-        "op": "add",
-        "path": "/tags/6",
-        "value": "housie18"
-    },
-    {
-        "op": "add",
-        "path": "/tags/7",
-        "value": "hoh18"
-    },
-    {
-        "op": "add",
-        "path": "/tags/8",
-        "value": "lfc19"
-    },
-    {
-        "op": "add",
-        "path": "/tags/9",
-        "value": "tbpp"
-    },
-    {
-        "op": "add",
-        "path": "/tags/10",
-        "value": "housie19"
-    },
-    {
-        "op": "add",
-        "path": "/tags/11",
-        "value": "gfc2020"
-    },
-    {
-        "op": "replace",
-        "path": "/external_profiles/1/uri",
-        "value": "https://www.facebook.com/pages/DIYA-Foundation/"
-    },
-    {
-        "op": "replace",
-        "path": "/external_profiles/1/label",
-        "value": "Facebook"
-    },
-    {
-        "op": "add",
-        "path": "/external_profiles/2",
-        "value": {
-            "label": "Youtube",
-            "uri": "http://www.youtube.com/watch?v=DezbmReWMf0"
-        }
-    },
-    {
-        "op": "add",
-        "path": "/official_name",
-        "value": "Diya Foundation"
-    }
-]
-```
-**Sample UI to show the differences**
-Hovering on each of the change should allow the user to accept or reject the change and update the base object and the JSON patch correspondingly.
-![UI to enter object and JSON patch](https://i.imgur.com/Gg27RFp.png)
-![Sample Output Diff UI](https://i.imgur.com/d0pcseK.png)
+### Profile
+- LinkedIn     : https://www.linkedin.com/in/sujith-p-jose-710266b7/
+- GitHub       : https://github.com/sujithpjose
+- Side Project : http://m2c2.s3-website.ap-south-1.amazonaws.com/
 
 ### Deliverables
 - Create a fork of this repository
