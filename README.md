@@ -2,6 +2,14 @@
 ## Assignment - Senior Front-end Engineer
    This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.7.
    Please find the Project setup and other details below.
+   
+## Installation
+
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+
+```bash
+pip install foobar
+```
 
 ### Project Setup
     
@@ -22,9 +30,8 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 ## Resume
 
 Front end developer with 6+ years of experience in the IT industry. Experience in building web and hybrid mobile applications for major clients. Goal Oriented, highly motivated Team player with excellent interpersonal skills. Currently, working as Software Engineer with Baker Hughes. History of onsite experience in Bahrain and USA.
-(91) 9567661847
-(91) 8848287743
-pjosesujith@gmail.com
+
+Mobile : +91-9567661847 E-Mail : pjosesujith@gmail.com
 
 ### SKILLS
 
