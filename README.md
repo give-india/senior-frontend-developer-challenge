@@ -53,13 +53,14 @@ Employee of the Quarter                         :   Q3 2015 - RapidValue Solutio
 Oracle Mobile Innovation Award:   Vehicle Checklist 2015 – RapidValue Solutions.
 
 #### EXPERIENCE & PROJECTS
-Baker Hughes, Cochin— Software Engineer
+**Baker Hughes, Cochin— Software Engineer**
 February 2019 - PRESENT
 
-QuEST Global, Thiruvananthapuram— Senior Software Engineer
+**QuEST Global, Thiruvananthapuram— Senior Software Engineer**
 September 2017 - February 2019
 
-**PROJECT: Sabio Drilling Insights - BakerHughes**
+##### PROJECTS: 
+**Sabio Drilling Insights - BakerHughes**
 
 Drilling Insights is a platform for accumulating drilling data in relation with Drill Bits. The application helps to provide useful analysis and insights to the application engineers.
 	
@@ -71,10 +72,11 @@ Bing map integration
 Expertise in D3.js/amCharts for data visualisations. 
 Got good user feedback for implementing visualisation export features for customer presentations.
 
-RapidValue Solutions, Cochin— Senior Software Engineer
+**RapidValue Solutions, Cochin— Senior Software Engineer**
 January 2014 - September 2019
 
-**PROJECT:  iExpense**
+##### PROJECTS:  
+**iExpense**
 
 The iExpense mobile application is meant to offer a one-stop solution for employees all expense related activities inside the organisation. 
 
@@ -84,14 +86,14 @@ OCR Integration for quick and accurate data entry.
 
 
 
-**PROJECT: Inventory management - GE**
+**Inventory management - GE**
 
 Offline data storage to mobile SQLite database.
 Offline inventory management capability to tackle lack of connectivity.
 One time sync.
 
 
-**PROJECT: VehicleChecklist** 
+**VehicleChecklist** 
 
 VehicleChecklist is an iPad app to automate the vehicle check-out/check-in process and integrate it with Oracle EBusiness Suite R12 rental and leasing module.    
 Developed custom components like dent marking and signature drawing.
