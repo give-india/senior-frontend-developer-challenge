@@ -56,7 +56,7 @@ export class ContainerComponent implements OnInit {
 
   private doCompare() {
 
-    const right = applyPatch(this.baseObj, this.patchObj, true, false).newDocument;
+    const right = applyPatch(this.baseObj, this.patchObj, false, false).newDocument;
     const delta = diff(this.baseObj, right);
     // console.log(delta);
     this.delta = formatters.html.format(delta, this.baseObj);
@@ -105,15 +105,15 @@ export class ContainerComponent implements OnInit {
   }
 
   private applyOperation(status: boolean, operation: { op, path }): void {
-    const operationIndex = this.patchObj.findIndex(patch => patch.op === operation.op && patch.path === operation.path);
+    const operationIndex = this.patchObj.findIndex(patch => (patch.op === operation.op || 'replace' === patch.op) && patch.path === operation.path);
     console.log(operation);
-    console.log('operationIndex:',operationIndex);
-    if (status && operationIndex > 0) {
+    console.log('operationIndex:', operationIndex);
+    if (status && operationIndex !== -1) {
       applyOperation(this.baseObj, this.patchObj[operationIndex]).newDocument;
       this.baseObj = Object.assign({}, this.baseObj);
     }
-    if (operationIndex > 0) {
-      this.patchObj.splice(operationIndex,1);
+    if (operationIndex !== -1) {
+      this.patchObj.splice(operationIndex, 1);
       this.patchObj = Object.assign([], this.patchObj);
     }
   }
