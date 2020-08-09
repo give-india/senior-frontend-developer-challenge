@@ -1,12 +1,15 @@
 
 ## Assignment - Senior Front-end Engineer
 
+   Please find the Project setup and other details below.
+
 ## Installation
 
     * Install **Angular CLI** globally.
     
     ```bash
     npm install -g @angular/cli
+    ```
     
     * Clone the git url to a local folder
     * 
@@ -15,6 +18,7 @@
     cd j-patch
     npm install
     ng serve
+    ```
 
 Not just ‘Frontend’, are you a pro at web development with a special liking for JavaScript? How about working with a team that’s full of the creative breed and where food and outings are considered as being equally important to work?
 
