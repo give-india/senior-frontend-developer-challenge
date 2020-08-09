@@ -96,7 +96,7 @@ English, Malayalam
 
 
 
-### Profile
+### Profiles & Links
 - LinkedIn     : https://www.linkedin.com/in/sujith-p-jose-710266b7/
 - GitHub       : https://github.com/sujithpjose
 - Side Project : http://m2c2.s3-website.ap-south-1.amazonaws.com/
