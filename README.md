@@ -1,27 +1,29 @@
 
 ## Assignment - Senior Front-end Engineer
    This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.7.
-   Please find the Project setup and other details below.
+   Please find the Project setup and Profile details below.
    
-## Project Setup
+### Project Setup
 
 * Install Angular CLI globally.
 
 ```bash
 npm install -g @angular/cli
 ```
-
-### Project Setup
-    
-    Install Angular CLI globally.
-
-      `npm install -g @angular/cli`
-    
-    Clone the source code from git repository to a local folder.
-
-      *cd j-patch
-      *npm install
-
+* Change your current working directory to the location where you would like to clone this repository.
+* Clone the repository.
+* Navigate to the cloned folder. In my case 
+```bash
+cd senior-frontend-developer-challenge
+```
+* Navigate to project folder.
+```bash
+cd j-patch
+```
+* Install dependencies.
+```bash
+npm install
+```
     
 ### Development server
 
@@ -31,7 +33,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
 Front end developer with 6+ years of experience in the IT industry. Experience in building web and hybrid mobile applications for major clients. Goal Oriented, highly motivated Team player with excellent interpersonal skills. Currently, working as Software Engineer with Baker Hughes. History of onsite experience in Bahrain and USA.
 
-Mobile : +91-9567661847 
+Mobile : +91-9567661847  
 E-Mail : pjosesujith@gmail.com
 
 ### SKILLS
