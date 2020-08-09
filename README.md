@@ -3,9 +3,9 @@
    This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.7.
    Please find the Project setup and other details below.
    
-## Installation
+## Project Setup
 
-Install Angular CLI globally.
+* Install Angular CLI globally.
 
 ```bash
 npm install -g @angular/cli
