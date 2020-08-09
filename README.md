@@ -1,6 +1,21 @@
 
 ## Assignment - Senior Front-end Engineer
 
+## Installation
+
+    * Install **Angular CLI** globally.
+    
+    ```bash
+    npm install -g @angular/cli
+    
+    * Clone the git url to a local folder
+    * 
+    
+    ```bash
+    cd j-patch
+    npm install
+    ng serve
+
 Not just ‘Frontend’, are you a pro at web development with a special liking for JavaScript? How about working with a team that’s full of the creative breed and where food and outings are considered as being equally important to work?
 
 We would love it if you are blessed with prudent design aesthetics but we would also want you to be game about having ‘fun’ while working. Welcome to the world of Give, where we have come together to introduce a culture of giving that aims to change lives for the better.
