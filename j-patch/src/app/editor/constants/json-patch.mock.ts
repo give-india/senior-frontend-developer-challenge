@@ -57,13 +57,13 @@ export const PatchObj: any[] = [
     },
     {
         "op": "add",
-        "path": "/tags/8",
-        "value": "lfc19"
+        "path": "/tags/9",
+        "value": "tbpp"
     },
     {
         "op": "add",
-        "path": "/tags/9",
-        "value": "tbpp"
+        "path": "/tags/8",
+        "value": "lfc19"
     },
     {
         "op": "add",

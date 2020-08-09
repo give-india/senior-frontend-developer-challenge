@@ -16,14 +16,16 @@
 
 
   <section class="delta">
+    <h4>Changes</h4>
     <div [innerHtml]="delta" #deltaSection></div>
+    <p class="text-green" *ngIf="!delta">You have resolved all changes! Please start with another set of documents.</p>
   </section>
 
 </section>
 
-<div [style.top.px]="position.y" [style.left.px]="position.x" class="confirm-popup" #confirm *ngIf="showPopup">
+<div [style.top.px]="position.y" [style.left.px]="position.x" class="confirm-popup" *ngIf="showPopup" #confirm>
 
-  <p>Accept changes ?</p>
+  <h4>Accept changes ?</h4>
   <article class="btn-grid">
     <button class="cancel" (click)=onAccept(false)>No</button>
     <button (click)=onAccept(true)>Yes</button>

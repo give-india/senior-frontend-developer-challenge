@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-const liCss = ['jsondiffpatch-modified', 'jsondiffpatch-added'];
+const liCss = ['jsondiffpatch-modified', 'jsondiffpatch-added', 'jsondiffpatch-deleted'];
 @Injectable({
   providedIn: 'root'
 })
@@ -19,8 +19,8 @@ export class HelperService {
       case 'jsondiffpatch-added':
         op = 'add';
         break;
-      case 'jsondiffpatch-moved':
-        op = 'move';
+      case 'jsondiffpatch-deleted':
+        op = 'remove';
         break;
     }
 

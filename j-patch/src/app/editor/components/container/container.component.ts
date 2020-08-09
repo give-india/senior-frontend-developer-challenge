@@ -7,7 +7,8 @@ import { formatters, diff } from 'jsondiffpatch';
 import { HelperService } from './../../services/helper.service';
 import { BaseObj, PatchObj } from './../../constants/json-patch.mock';
 
-const popupOffset = 100;
+const popupYOffset = 80;
+const popupXOffset = 10;
 @Component({
   selector: 'app-container',
   templateUrl: './container.component.html',
@@ -18,11 +19,13 @@ export class ContainerComponent implements OnInit {
   public baseObj: any = BaseObj;
   public patchObj: any[] = PatchObj;
 
-  public delta: any;
+  // public baseObj: any = null;
+  // public patchObj: any[] = null;
+
+  public delta: any = null;
 
   public editorOptions1: JsonEditorOptions;
   public editorOptions2: JsonEditorOptions;
-  public data: any;
   public showPopup = false;
   private currentTarget;
   @ViewChild(JsonEditorComponent) editor: JsonEditorComponent;
@@ -56,9 +59,12 @@ export class ContainerComponent implements OnInit {
 
   private doCompare() {
 
+    if (!this.baseObj || !this.patchObj) {
+      return;
+    }
+
     const right = applyPatch(this.baseObj, this.patchObj, false, false).newDocument;
     const delta = diff(this.baseObj, right);
-    // console.log(delta);
     this.delta = formatters.html.format(delta, this.baseObj);
 
     setTimeout(() => {
@@ -77,8 +83,8 @@ export class ContainerComponent implements OnInit {
     if (!li) return;
 
     if (e.target && this.isLIModified(e.target)) {
-      this.position.x = e.pageX;
-      this.position.y = e.pageY - popupOffset;
+      this.position.x = e.pageX - popupXOffset;
+      this.position.y = e.pageY - popupYOffset;
       this.currentTarget = e.target;
       this.showPopup = true;
     }
@@ -89,12 +95,13 @@ export class ContainerComponent implements OnInit {
   }
 
   public getEditorChange(data, from: 'base' | 'patch') {
-    // if ('base' === from) {
-    //   this.baseObj = data;
-    // } else {
-    //   this.patchObj = data;
-    // }
-    // this.doCompare();
+    debugger
+    if ('base' === from) {
+      this.baseObj = data;
+    } else {
+      this.patchObj = data;
+    }
+    this.doCompare();
   }
 
   public onAccept(status: boolean): void {
@@ -105,17 +112,18 @@ export class ContainerComponent implements OnInit {
   }
 
   private applyOperation(status: boolean, operation: { op, path }): void {
-    const operationIndex = this.patchObj.findIndex(patch => (patch.op === operation.op || 'replace' === patch.op) && patch.path === operation.path);
+    let operationIndex = this.patchObj.findIndex(patch => (patch.op === operation.op || 'replace' === patch.op) && patch.path === operation.path);
     console.log(operation);
     console.log('operationIndex:', operationIndex);
-    if (status && operationIndex !== -1) {
+    operationIndex = operationIndex === -1 ? 0 : operationIndex;
+    if (status) {
       applyOperation(this.baseObj, this.patchObj[operationIndex]).newDocument;
       this.baseObj = Object.assign({}, this.baseObj);
     }
-    if (operationIndex !== -1) {
-      this.patchObj.splice(operationIndex, 1);
-      this.patchObj = Object.assign([], this.patchObj);
-    }
+
+    this.patchObj.splice(operationIndex, 1);
+    this.patchObj = Object.assign([], this.patchObj);
+
   }
 
 }

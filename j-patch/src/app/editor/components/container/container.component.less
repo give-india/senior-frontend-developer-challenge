@@ -34,16 +34,19 @@ json-editor {
     top            : 60%;
     left           : 50%;
     z-index        : 10;
-    background     : #e5e5e5;
+    background     : #6c7a86;
     padding        : 10px;
-    width          : 225px;
-    margin         : 0 auto;
-    text-align     : center;
-    border-radius  : 3px;
-    color          : #b12424;
+    width          : 170px;
+    // text-align     : center;
+    border-radius  : 5px;
+    color          : white;
     display        : flex;
     flex-direction : column;
     justify-content: space-around;
+}
+
+.confirm-popup h4 {
+    margin-top: 0;
 }
 
 .btn-grid {
@@ -52,9 +55,9 @@ json-editor {
 }
 
 .confirm-popup button {
-    width     : 60px;
+    width     : 50px;
     border    : 0;
-    height    : 27px;
+    // height    : 27px;
     background: #8FD5F5;
     color     : white;
     margin    : 5px;
@@ -67,6 +70,14 @@ json-editor {
 }
 
 .delta {
-    background: white;
-    margin-top: 10px;
+    background    : white;
+    margin        : 10px;
+    min-height    : 50px;
+    display       : flex;
+    padding       : 10px;
+    flex-direction: column;
+}
+
+.text-green {
+    color: #045d07;
 }
