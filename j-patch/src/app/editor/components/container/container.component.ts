@@ -106,12 +106,16 @@ export class ContainerComponent implements OnInit {
 
   private applyOperation(status: boolean, operation: { op, path }): void {
     const operationIndex = this.patchObj.findIndex(patch => patch.op === operation.op && patch.path === operation.path);
+    console.log(operation);
+    console.log('operationIndex:',operationIndex);
     if (status && operationIndex > 0) {
       applyOperation(this.baseObj, this.patchObj[operationIndex]).newDocument;
       this.baseObj = Object.assign({}, this.baseObj);
     }
-    this.patchObj.splice(operationIndex);
-    this.patchObj = Object.assign([], this.patchObj);
+    if (operationIndex > 0) {
+      this.patchObj.splice(operationIndex,1);
+      this.patchObj = Object.assign([], this.patchObj);
+    }
   }
 
 }
