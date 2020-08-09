@@ -5,6 +5,11 @@
    
 ### Project Setup
 
+* Prerequisites for Angular.
+```bash
+https://angular.io/guide/setup-local
+```
+
 * Install Angular CLI globally.
 
 ```bash
