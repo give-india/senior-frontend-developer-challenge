@@ -1,18 +1,28 @@
-<section class="editor-container">
+<section class="container">
 
-  <article class="editor">
-    <h4>Base Object</h4>
-    <json-editor [options]="editorOptions" [data]="baseObj" (change)="getData($event)"></json-editor>
-  </article>
+  <section class="editor-container">
 
-  <article class="editor">
-    <h4>Patch Object</h4>
-    <json-editor [options]="editorOptions" [data]="patchObj" (change)="getData($event)"></json-editor>
-  </article>
+    <article class="editor">
+      <h4>Base Object</h4>
+      <json-editor [options]="editorOptions1" [data]="baseObj" (change)="getEditorChange($event,'base')"></json-editor>
+    </article>
+
+    <article class="editor">
+      <h4>Patch Object</h4>
+      <json-editor [options]="editorOptions2" [data]="patchObj" (change)="getEditorChange($event,'patch')">
+      </json-editor>
+    </article>
+  </section>
+
+
+  <section class="delta">
+    <div [innerHtml]="delta" #deltaSection></div>
+  </section>
+
 </section>
 
-<button (click)="doCompare()">Compare</button>
-
-<section>
-  <div [innerHtml]="delta" (mouseover)="onMouseOver($event)" (mouseout)="onMouseOut($event)"></div>
-</section>
+<div [style.top.px]="position.y" [style.left.px]="position.x" class="confirm-popup" #confirm [hidden]="!showPopup">
+  <p>Accept changes ?</p>
+  <button (click)=onAccept(true)>Yes</button>
+  <button (click)=onAccept(false)>No</button>
+</div>

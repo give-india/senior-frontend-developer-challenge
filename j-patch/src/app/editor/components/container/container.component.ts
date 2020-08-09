@@ -1,9 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { JsonEditorComponent, JsonEditorOptions } from 'ang-jsoneditor';
 
-import { applyPatch } from 'fast-json-patch';
+import { applyPatch, applyOperation } from 'fast-json-patch';
 import { formatters, diff } from 'jsondiffpatch';
 
+import { HelperService } from './../../services/helper.service';
+import { BaseObj, PatchObj } from './../../constants/json-patch.mock';
+
+const popupOffset = 100;
 @Component({
   selector: 'app-container',
   templateUrl: './container.component.html',
@@ -11,155 +15,103 @@ import { formatters, diff } from 'jsondiffpatch';
 })
 export class ContainerComponent implements OnInit {
 
-  public baseObj: any = {
-    "slug": "diya-foundation",
-    "name": "Diya Foundation",
-    "registration_number": "386/98-99",
-    "auditor_name": "Das Kumar And Company",
-    "created_at": "2013-02-08T09:28:51.000Z",
-    "updated_at": "2020-02-25T06:11:35.814Z",
-    "external_profiles": [{
-      "label": "Website",
-      "uri": "http://www.diyafoundation-india.org/Site/index.html"
-    }, {
-      "label": "Youtube",
-      "uri": "http://www.youtube.com/watch?v=DezbmReWMf0"
-    }],
-    "tags": ["hoh18", "lfc19", "tbpp", "housie19", "gfc2020", "housie18"]
-  };
-  public patchObj: any = [
-    {
-      "op": "replace",
-      "path": "/tags/5",
-      "value": "spbm18"
-    },
-    {
-      "op": "replace",
-      "path": "/tags/4",
-      "value": "bengaluru10k-18"
-    },
-    {
-      "op": "replace",
-      "path": "/tags/3",
-      "value": "lfc18-wow2"
-    },
-    {
-      "op": "replace",
-      "path": "/tags/2",
-      "value": "tcs10k-18"
-    },
-    {
-      "op": "replace",
-      "path": "/tags/1",
-      "value": "lfc18-cbp"
-    },
-    {
-      "op": "replace",
-      "path": "/tags/0",
-      "value": "lfc18"
-    },
-    {
-      "op": "add",
-      "path": "/tags/6",
-      "value": "housie18"
-    },
-    {
-      "op": "add",
-      "path": "/tags/7",
-      "value": "hoh18"
-    },
-    {
-      "op": "add",
-      "path": "/tags/8",
-      "value": "lfc19"
-    },
-    {
-      "op": "add",
-      "path": "/tags/9",
-      "value": "tbpp"
-    },
-    {
-      "op": "add",
-      "path": "/tags/10",
-      "value": "housie19"
-    },
-    {
-      "op": "add",
-      "path": "/tags/11",
-      "value": "gfc2020"
-    },
-    {
-      "op": "replace",
-      "path": "/external_profiles/1/uri",
-      "value": "https://www.facebook.com/pages/DIYA-Foundation/"
-    },
-    {
-      "op": "replace",
-      "path": "/external_profiles/1/label",
-      "value": "Facebook"
-    },
-    {
-      "op": "add",
-      "path": "/external_profiles/2",
-      "value": {
-        "label": "Youtube",
-        "uri": "http://www.youtube.com/watch?v=DezbmReWMf0"
-      }
-    },
-    {
-      "op": "add",
-      "path": "/official_name",
-      "value": "Diya Foundation"
-    }
-  ];
-
-  public patch: any;
+  public baseObj: any = BaseObj;
+  public patchObj: any[] = PatchObj;
 
   public delta: any;
 
-  public editorOptions: JsonEditorOptions;
+  public editorOptions1: JsonEditorOptions;
+  public editorOptions2: JsonEditorOptions;
   public data: any;
+  public showPopup = false;
+  private currentTarget;
   @ViewChild(JsonEditorComponent) editor: JsonEditorComponent;
+  @ViewChild('deltaSection') deltaSection: ElementRef;
+  public position: { x: number, y: number } = { x: 0, y: 0 };
 
-  constructor() {
+
+  constructor(
+    private elementRef: ElementRef,
+    private helperService: HelperService
+  ) {
     this.initJsonEditor();
+    this.initJsonEditorSecond();
   }
 
   ngOnInit() {
+    this.doCompare();
   }
 
   private initJsonEditor(): void {
-    this.editorOptions = new JsonEditorOptions()
-    this.editorOptions.modes = ['code', 'text', 'tree', 'view']; // set all allowed modes
-    this.editorOptions.mode = 'code'; //set only one mode
+    this.editorOptions1 = new JsonEditorOptions()
+    this.editorOptions1.modes = ['code', 'text', 'tree', 'view']; // set all allowed modes
+    this.editorOptions1.mode = 'code'; //set only one mode
   }
 
-  public doCompare() {
+  private initJsonEditorSecond(): void {
+    this.editorOptions2 = new JsonEditorOptions()
+    this.editorOptions2.modes = ['code', 'text', 'tree', 'view']; // set all allowed modes
+    this.editorOptions2.mode = 'code'; //set only one mode
+  }
+
+  private doCompare() {
 
     const right = applyPatch(this.baseObj, this.patchObj, true, false).newDocument;
     const delta = diff(this.baseObj, right);
+    // console.log(delta);
     this.delta = formatters.html.format(delta, this.baseObj);
 
+    setTimeout(() => {
+      this.attachEvent();
+    }, 0);
+
   }
 
-  public show() {
-    this.delta = formatters.html.showUnchanged(true);
+  private attachEvent() {
+    this.deltaSection.nativeElement.addEventListener('mouseover', this.onMouseOver.bind(this));
   }
 
-  public hide() {
-    this.delta = formatters.html.hideUnchanged();
+  public onMouseOver(e) {
+    this.showPopup = false;
+    let li = e.target.closest('li');
+    if (!li) return;
+
+    if (e.target && this.isLIModified(e.target)) {
+      this.position.x = e.pageX;
+      this.position.y = e.pageY - popupOffset;
+      this.currentTarget = e.target;
+      this.showPopup = true;
+    }
   }
 
-  public onMouseOver(event) {
-    console.log('onMouseOver', event);
+  private isLIModified(target): boolean {
+    return this.helperService.isLIModified(target);
   }
 
-  public onMouseOut(event) {
-    console.log('onMouseOut', event);
+  public getEditorChange(data, from: 'base' | 'patch') {
+    // if ('base' === from) {
+    //   this.baseObj = data;
+    // } else {
+    //   this.patchObj = data;
+    // }
+    // this.doCompare();
   }
 
-  public getData(data) {
-    console.log('getData');
+  public onAccept(status: boolean): void {
+    const operation = this.helperService.buildPatchOperation(this.currentTarget);
+    this.applyOperation(status, operation);
+    this.doCompare();
+    this.showPopup = false;
+  }
+
+  private applyOperation(status: boolean, operation: { op, path }): void {
+    const operationIndex = this.patchObj.findIndex(patch => patch.op === operation.op && patch.path === operation.path);
+    if (status && operationIndex > 0) {
+      applyOperation(this.baseObj, this.patchObj[operationIndex]).newDocument;
+      this.baseObj = Object.assign({}, this.baseObj);
+    }
+    this.patchObj.splice(operationIndex);
+    this.patchObj = Object.assign([], this.patchObj);
   }
 
 }
