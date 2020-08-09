@@ -4,19 +4,18 @@
    Please find the Project setup and other details below.
 
 ### Installation
+    Install Angular CLI globally.
 
-    * Install **Angular CLI** globally.
     
-    ```bash
+
     npm install -g @angular/cli
-    ```
     
     * Clone the git url to a local folder
     
-    ```bash
+
     cd j-patch
     npm install
-    ```
+
     
 ## Development server
 
