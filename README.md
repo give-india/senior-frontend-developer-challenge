@@ -1,9 +1,9 @@
 
 ## Assignment - Senior Front-end Engineer
-
+   This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.7.
    Please find the Project setup and other details below.
 
-## Installation
+### Installation
 
     * Install **Angular CLI** globally.
     
@@ -12,31 +12,15 @@
     ```
     
     * Clone the git url to a local folder
-    * 
     
     ```bash
     cd j-patch
     npm install
-    ng serve
     ```
+    
+## Development server
 
-Not just ‘Frontend’, are you a pro at web development with a special liking for JavaScript? How about working with a team that’s full of the creative breed and where food and outings are considered as being equally important to work?
-
-We would love it if you are blessed with prudent design aesthetics but we would also want you to be game about having ‘fun’ while working. Welcome to the world of Give, where we have come together to introduce a culture of giving that aims to change lives for the better.
-Stalk us at [our website](https://www.giveindia.org/), [FB](https://www.facebook.com/GiveIndia/), [Twitter](https://twitter.com/giveindia/), [LinkedIn](https://www.linkedin.com/company/giveindia/)
-
-We are looking for determined front-end developers who come with a strong experience in implementing modern web UIs that prove to be are a delight for the user. If you think you have what it takes, build us this simple app in a frontend stack of your choosing.
-
-### Objective
-Given a JS object and a JSON-patch, create a UI to
--   show the changes due to each patch operation
--   allow the user to approve / reject one patch operation at a time
--  update the UI to show the remaining operations
-
-### What is JSON Patch?
-
-JSON Patch is a format for describing changes to a JSON document. It can be used to store changes in the form of patch operations. The patch documents are themselves JSON documents. JSON Patch is specified in [RFC 6902](http://tools.ietf.org/html/rfc6902) from the IETF.
-
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ### Example Scenario
 **Base Object**
