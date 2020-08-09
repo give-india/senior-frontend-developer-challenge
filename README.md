@@ -118,9 +118,3 @@ English, Malayalam
 - GitHub       : https://github.com/sujithpjose
 - Side Project : http://m2c2.s3-website.ap-south-1.amazonaws.com/
 
-### Deliverables
-- Create a fork of this repository
-- Code your solution in a frontend stack of your choice
-- Include instructions on how to set it up and run in the [README.md](README.md)
-- Add your resume and other profile / project links
-- Submit a pull request (PR)
