@@ -139,3 +139,12 @@ Hovering on each of the change should allow the user to accept or reject the cha
 - Include instructions on how to set it up and run in the [README.md](README.md)
 - Add your resume and other profile / project links
 - Submit a pull request (PR)
+
+
+### Set up
+- Included in a separate README.md inside the jsonpatchtool folder
+
+### Other Profile / Project Links
+- [Github](https://github.com/AshayTikekar)
+- [Linked In](www.linkedin.com/in/ashay-tikekar)
+- [Medium](https://medium.com/@ashaytikekar)
