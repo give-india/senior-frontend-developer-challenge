@@ -1,0 +1,77 @@
+  
+  .card_view_container
+  {
+    margin-top: 15px;
+    .card-view{
+        display: inline-block;
+        vertical-align : top;
+        width: calc(32% - 3px);
+        background-color: white;
+        margin: 0 12px 24px 0;
+        color: gray;
+        border: 2px solid #e8e8e8
+        ;
+        outline-style: auto;
+        position: relative;
+         background: linear-gradient(360deg, #F8F8F8 0%,#F8F8F8 50%,white 50%,white 50%,white 100%);
+        
+        .name_title{
+            font-weight: bold;
+            font-size: 15px;
+            color: #161616;
+        }
+        .registeration {
+          font-weight: normal;
+          font-size: 15px;
+          margin-top: 4px;
+          color: #161616;
+          font-weight: 500;
+        }
+        .created_box{
+            display: inline-block;
+            width: 48%;
+            box-sizing: border-box;
+            vertical-align: text-top;
+            min-height: 50px;
+        }
+        .label_title {
+            font-size: 14px;
+            line-height: 17px;
+            color:#161616;
+            margin-top: 30px;
+            font-weight: bold;
+        }
+        .label_value{
+            word-wrap: break-word;
+            font-size: 13px;
+            line-height: 15px;
+            color: #333333;
+            text-transform: capitalize;
+        }
+        .text-right {
+            float: right;
+        }
+        .title_strip {
+            background-color: #E8FAFA;
+            min-width: 101px;
+            height: 21px;
+            text-align: center;
+            line-height: 21px;
+            float: right;
+            font-size: 10px;
+            margin-top: -11px;
+            border-radius: 10px;
+            border: .5px solid;
+        }
+        .tags-id {
+            margin-top: 15px;
+            display: flex;
+            .id{
+              font-size: 14px;
+              font-weight: normal;
+              margin-right: 3%;
+            }
+        }
+    }   
+ }
+  
