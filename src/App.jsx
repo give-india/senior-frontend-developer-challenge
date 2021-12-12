@@ -5,6 +5,11 @@ import ReactJson from 'react-json-view';
 
 import './App.css';
 
+/**
+ * @component
+ * @description UI for core of the application
+ * @returns 
+ */
 function App() {
   const [start, setStart] = useState(false);
   const [baseObjectString, setBaseObjectString] = useState('');
@@ -15,6 +20,12 @@ function App() {
   const [compiledObject, setCompiledObject] = useState(null);
   const [selectedOperation, setSelectedOperation] = useState(-1);
 
+  /**
+   * @function To start and restart patch operations
+   * @param {boolean} flag Condition to start patch operations
+   * @description Displays/hides patch operations menu
+   * @throws InvalidJSONException
+   */
   const toggleFields = (flag) => {
     setStart(flag);
     if (flag) {
@@ -42,6 +53,11 @@ function App() {
     }
   }
 
+  /**
+   * @function To apply an operation
+   * @param {number} index Index of operation to be applied
+   * @throws PatchApplyError
+   */
   const applyOperation = (index) => {
     try {
       setCompiledObject((new JSONPatch([operations[index]])).apply(compiledObject));
@@ -55,6 +71,9 @@ function App() {
     }
   }
 
+  /**
+   * @function To reject an operation from list
+   */
   const rejectOperation = () => {
     const newOperations = JSON.parse(JSON.stringify(operations));
     newOperations.splice(selectedOperation, 1);
