@@ -23,6 +23,19 @@ With two textareas each for base object and patch a menu is displayed to:
 
 > Uses `jsonpatch` to conduct patch operations and `react-json-view` to view compiled object and operations.
 
+###  Requirements for development:
+- Browser
+- node, npm/yarn
+
+
+### Steps to run:
+- Clone or download the repository
+- In command line navigate to root of the project and enter:
+  - `npm install` or `yarn install`
+  - To start `npm run` or `yarn start`.
+  Your app will run at localhost:3000
+- View application in [production](https://patch-maker.netlify.app/).
+
 
 ### Example Scenario
 Copy the base object and patch to their respective fields to test.
