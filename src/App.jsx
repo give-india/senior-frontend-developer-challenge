@@ -43,11 +43,16 @@ function App() {
   }
 
   const applyOperation = (index) => {
-    setCompiledObject((new JSONPatch([operations[index]])).apply(compiledObject));
-    const newOperations = JSON.parse(JSON.stringify(operations));
-    newOperations.splice(index, 1);
-    setOperations(newOperations);
-    setSelectedOperation(-1);
+    try {
+      setCompiledObject((new JSONPatch([operations[index]])).apply(compiledObject));
+      const newOperations = JSON.parse(JSON.stringify(operations));
+      newOperations.splice(index, 1);
+      setOperations(newOperations);
+      setSelectedOperation(-1);
+    } catch(err) {
+      console.error(err);
+      alert('Invalid patch');
+    }
   }
 
   const rejectOperation = () => {
@@ -66,7 +71,7 @@ function App() {
         </textarea>
         <div className='buttons-container'>
           <button onClick={() => toggleFields(true)}>Start</button>
-          <button onClick={() => toggleFields(false)}>Reset</button>
+          <button onClick={() => toggleFields(false)}>Clear</button>
         </div>
         <textarea disabled={start} className='patch-field' value={patchString}
           onChange={(event) => setPatchString(event.target.value)}
@@ -83,7 +88,7 @@ function App() {
               </ReactJson>
             </section>
             <div className='buttons-container'>
-              <button onClick={() => toggleFields(false)}>Reset</button>
+              <button onClick={() => setStart(false)}>Reset</button>
               {
                 operations.length !== 0 && (
                   <button onClick={() => applyOperation(0)}>Apply Next &gt;&gt;</button>
