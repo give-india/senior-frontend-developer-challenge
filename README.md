@@ -1,13 +1,6 @@
 
 ## Assignment - Senior Front-end Engineer
 
-Not just ‘Frontend’, are you a pro at web development with a special liking for JavaScript? How about working with a team that’s full of the creative breed and where food and outings are considered as being equally important to work?
-
-We would love it if you are blessed with prudent design aesthetics but we would also want you to be game about having ‘fun’ while working. Welcome to the world of Give, where we have come together to introduce a culture of giving that aims to change lives for the better.
-Stalk us at [our website](https://www.giveindia.org/), [FB](https://www.facebook.com/GiveIndia/), [Twitter](https://twitter.com/giveindia/), [LinkedIn](https://www.linkedin.com/company/giveindia/)
-
-We are looking for determined front-end developers who come with a strong experience in implementing modern web UIs that prove to be are a delight for the user. If you think you have what it takes, build us this simple app in a frontend stack of your choosing.
-
 ### Objective
 Given a JS object and a JSON-patch, create a UI to
 -   show the changes due to each patch operation
@@ -18,8 +11,21 @@ Given a JS object and a JSON-patch, create a UI to
 
 JSON Patch is a format for describing changes to a JSON document. It can be used to store changes in the form of patch operations. The patch documents are themselves JSON documents. JSON Patch is specified in [RFC 6902](http://tools.ietf.org/html/rfc6902) from the IETF.
 
+### Solution
+
+With two textareas each for base object and patch a menu is displayed to:
+- Select an operation from list by clicking on a particular one.
+- Apply the next(topmost) operation from the list.
+- Reject the selected operation.
+- Start over the process.
+- Developed using:
+<a href="https://reactjs.org/" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="20" height="20"/> </a><br>
+
+> Uses `jsonpatch` to conduct patch operations and `react-json-view` to view compiled object and operations.
+
 
 ### Example Scenario
+Copy the base object and patch to their respective fields to test.
 **Base Object**
 ```js
 {
@@ -128,14 +134,12 @@ JSON Patch is a format for describing changes to a JSON document. It can be used
     }
 ]
 ```
-**Sample UI to show the differences**
-Hovering on each of the change should allow the user to accept or reject the change and update the base object and the JSON patch correspondingly.
-![UI to enter object and JSON patch](https://i.imgur.com/Gg27RFp.png)
-![Sample Output Diff UI](https://i.imgur.com/d0pcseK.png)
 
-### Deliverables
-- Create a fork of this repository
-- Code your solution in a frontend stack of your choice
-- Include instructions on how to set it up and run in the [README.md](README.md)
-- Add your resume and other profile / project links
-- Submit a pull request (PR)
+#### Solution by:
+
+[Ananthakrishna](https://drive.google.com/file/d/1r2NigIV7-fBgabcqEkywn0mquSB-AkEA/view?usp=sharing) <br>
+<a href="https://linkedin.com/in/ananthakrishna-h-s" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="ananthakrishna-h-s" height="20" width="20" /></a>
+&nbsp;&nbsp;
+<a href="https://medium.com/@ananthakrishna-h-s" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/medium.svg" alt="@ananthakrishna-h-s" height="20" width="20" /></a>
+&nbsp;&nbsp;
+<a href="https://github.com/ananthakrishna-hs" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/github.svg" alt="@ananthakrishna-h-s" height="20" width="20" /></a>
