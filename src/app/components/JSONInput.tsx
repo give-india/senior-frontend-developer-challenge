@@ -9,7 +9,7 @@ const JSONInput = () => {
 
   return (
     <Container fixed>
-      <pre>{input}</pre>
+      <pre>{JSON.stringify(input, null, 3)}</pre>
     </Container>
   );
 }

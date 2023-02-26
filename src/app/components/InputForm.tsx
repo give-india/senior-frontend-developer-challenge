@@ -5,9 +5,7 @@ import { useDispatch } from "react-redux";
 import { saveInput } from "../store/json-input.slice";
 import Layout from "./Layout";
 
-export type JSONInput = {
-  json: string,
-}
+
 
 enum  MessageType {
   SUCCESS,
@@ -20,13 +18,14 @@ type Message = {
 }
 
 const JSONInputForm = () => {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<JSONInput>();
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [submitMessage, setSubmitMessage] = useState<Message | null>();
   const dispatch = useDispatch();
 
-  const onSubmit: SubmitHandler<JSONInput> =  (data) => {
+  const onSubmit =  (data:any) => {
     try {
-      dispatch(saveInput(data));
+      const jsonData = JSON.parse(data.json);
+      dispatch(saveInput(jsonData));
       setSubmitMessage({text:"Input saved successfully", type:MessageType.SUCCESS});
       
     } catch (e) {
@@ -42,7 +41,6 @@ const JSONInputForm = () => {
               variant="standard" 
               {...register("json", { required: true })} 
               placeholder="Enter Valid JSON"
-              helperText="Please enter proper JSON"
               fullWidth
               multiline={true}
               rows={10}>  

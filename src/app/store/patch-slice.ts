@@ -33,10 +33,12 @@ export const patchSlice = createSlice({
     savePatches: (state, action: PayloadAction<Patch[]>) => {
       state.patches = action.payload;
     },
-
+    setStatus:(state, action: PayloadAction<{index:number, status:PatchStatus}>) => {
+      state.patches[action.payload.index].status = action.payload.status;
+    }
   }
 });
 
-export const { savePatches } = patchSlice.actions;
+export const { savePatches,setStatus } = patchSlice.actions;
 export default patchSlice.reducer
 

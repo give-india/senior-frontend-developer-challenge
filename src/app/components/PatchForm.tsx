@@ -4,7 +4,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { Patch, PatchData, PatchStatus, savePatches } from "../store/patch-slice";
-import { JSONInput } from "./InputForm";
 
 
 const PatchInputForm = () => {
@@ -42,7 +41,7 @@ const PatchInputForm = () => {
       multiline={true}
       rows={10}>
       </TextField>
-      <input type="submit" />
+      <Button type="submit" variant="contained">Save</Button>
   </form>
   );
 }
