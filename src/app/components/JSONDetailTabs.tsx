@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import { stat } from 'fs';
 import { RootState } from '../store';
 import JSONInputForm from './InputForm';
-import JSONPatchInputForm from './PatchForm';
+import PatchInputForm from './PatchForm';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -67,7 +67,10 @@ const JSONDetailTabs = () => {
         { input ?  <JSONInput /> : <JSONInputForm />}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        { patches && patches.length > 0 ? <JsonPatchList /> : <JSONPatchInputForm /> }
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <JsonPatchList /> 
+        </Box>
+        <PatchInputForm />
       </TabPanel>
     </Box>
   );

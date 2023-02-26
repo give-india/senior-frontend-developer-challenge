@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import jsonInputReducer from './json-input.slice'
+import patchSlice from './patch-slice'
 
 export const store = configureStore({
   reducer: {
-    input: jsonInputReducer
+    input: jsonInputReducer,
+    patch: patchSlice
   },
 })
 
