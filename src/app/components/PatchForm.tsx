@@ -1,7 +1,5 @@
-import { ErrorMessage } from "@hookform/error-message";
 import { Button, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { Patch, PatchData, PatchStatus, savePatches } from "../store/patch-slice";
@@ -12,7 +10,7 @@ const PatchInputForm = ({prevFormStep, modalClose}) => {
   const patches:Patch[] = useSelector((state:RootState) => state.patch.patches);
   const selectedPatchIndex:number|null = useSelector((state:RootState) => state.patch.selectedIndex);
   const dispatch = useDispatch();
-  
+
   const setPatchString = () => {
     if(patches.length > 0 && selectedPatchIndex === null) {
       const patchData:PatchData[] = patches.map((patch) => patch.data);
@@ -50,8 +48,9 @@ const PatchInputForm = ({prevFormStep, modalClose}) => {
               i === selectedPatchIndex ? newPatch : patch
             )
          });
+        }else{
+          allPatches.push(newPatch);
         }
-        allPatches.push(newPatch);
       }
       dispatch(savePatches(allPatches));
       modalClose();

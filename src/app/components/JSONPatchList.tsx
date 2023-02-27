@@ -8,19 +8,15 @@ import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { Patch, PatchStatus, setStatus, setSelectedIndex, deletePatch } from "../store/patch-slice";
-import { useState } from "react";
+
 import { applyPatch } from "../store/json-input.slice";
 import { Operation } from "fast-json-patch";
 
 //@ts-ignore
 const JsonPatchList = ({openModal}) => {
   const patches:Patch[] = useSelector((state:RootState) => state.patch.patches);
-  const jsonObj  = useSelector((state:RootState) => state.input.currentJson);
   const dispatch = useDispatch();
 
-  const validatePatch = (patch:Patch) => {
-
-  }
 
   const acceptPatch = (patch:Patch, index:number) => {
     console.log(patch.data);

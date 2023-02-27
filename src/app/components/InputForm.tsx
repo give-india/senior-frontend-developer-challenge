@@ -1,21 +1,8 @@
-import { ErrorMessage } from "@hookform/error-message";
 import { Box, Button, TextField } from "@mui/material";
 import { useForm} from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { saveInput } from "../store/json-input.slice";
-
-
-
-enum  MessageType {
-  SUCCESS,
-  ERROR,
-}
-
-type Message = {
-  text:string,
-  type:MessageType
-}
 
 //@ts-ignore
 const InputForm = ({ formStep, nextFormStep}) => {

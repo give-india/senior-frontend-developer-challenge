@@ -1,7 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import * as jsonpatch from 'fast-json-patch';
 import { Operation } from 'fast-json-patch';
-import { PatchData } from './patch-slice';
 
 
 export type JSONInputState = {

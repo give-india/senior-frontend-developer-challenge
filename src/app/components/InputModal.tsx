@@ -1,6 +1,5 @@
-import { Box, Button, Modal } from "@mui/material";
+import { Box, Modal } from "@mui/material";
 import React from "react";
-import { useState } from "react";
 
 
 const InputModal = ({children, open, handleClose}:{children: React.ReactElement, open:boolean, handleClose:any}) => {

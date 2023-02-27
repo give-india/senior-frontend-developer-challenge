@@ -1,6 +1,5 @@
-import { Box, Button, Step, StepLabel, Stepper, Typography } from "@mui/material";
+import { Box, Step, StepLabel, Stepper } from "@mui/material";
 import { useState } from "react";
-import { useFormContext } from "react-hook-form";
 import InputForm from "./InputForm";
 import PatchInputForm from "./PatchForm";
 
@@ -27,11 +26,7 @@ const FormStepper = ({modalClose}) => {
   const [formStep, setFormStep] = useState(0);
   const nextFormStep = () => setFormStep((currentStep) => currentStep + 1);
   const prevFormStep = () => setFormStep((currentStep) => currentStep - 1);
-
-
   const steps = getSteps();
-
-
   
   return (
     <Box sx={{ ...modalStyle, width: 700 }} >    

@@ -1,14 +1,10 @@
-import { Box, Button, Drawer, Grid, Paper, Tab, Tabs, Typography } from "@mui/material"
-import { Container } from "@mui/system";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { Box, Button, Drawer } from "@mui/material"
+import { useState } from "react";
 import FormManager from "./app/components/FormManager";
 import InputModal from "./app/components/InputModal";
 import JsonDiff from "./app/components/JsonDiff";
-import JSONInput from "./app/components/JSONInput";
 import JsonPatchList from "./app/components/JSONPatchList";
 import PatchInputForm from "./app/components/PatchForm";
-import { RootState } from "./app/store";
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { modalStyle } from "./app/components/FormStepper";
 
@@ -22,7 +18,6 @@ const PatchModalBox = ({patchFormClose}) => {
     </Box>
   )
 }
-
 
 const Dashboard = () => {  
   const [openForms, setOpenForms] = useState(true);
@@ -39,8 +34,6 @@ const Dashboard = () => {
   const handlePatchFormOpen = () => {
     setOpenPatchForm(true);
   }
-
-  
 
   return(
     <Box sx={{ display: 'flex' }}>
