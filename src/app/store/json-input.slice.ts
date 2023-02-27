@@ -5,12 +5,14 @@ import { PatchData } from './patch-slice';
 
 
 export type JSONInputState = {
-  json: any
+  currentJson: any,
+  oldJson:any
 }
 
 
 const initialState: JSONInputState = {
-  json: null
+  currentJson: null,
+  oldJson:null
 }
 
 export const jsonInputSlice = createSlice({
@@ -19,12 +21,12 @@ export const jsonInputSlice = createSlice({
   reducers: {
     saveInput: (state, action: PayloadAction<any>) => {
       console.log(action, "inside saveInput")
-      state.json = action.payload;
+      state.currentJson = action.payload;
+      state.oldJson = action.payload;
     },
     applyPatch:(state, action:PayloadAction<Operation[]>) => {
-      state.json = jsonpatch.applyPatch(state.json, action.payload).newDocument;
+      state.currentJson = jsonpatch.applyPatch(state.currentJson, action.payload).newDocument;
     }
-
   }
 });
 

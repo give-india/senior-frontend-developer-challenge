@@ -5,12 +5,9 @@ import Dashboard from "./Dashboard";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Dashboard />,
   },
-  {
-    path: 'dashboard',
-    element:<Dashboard />
-  }
+  
 ]);
 
 export default router;

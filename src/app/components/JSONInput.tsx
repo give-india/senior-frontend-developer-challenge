@@ -5,11 +5,18 @@ import { RootState } from "../store";
 
 //@ts-ignore
 const JSONInput = () => {
-  const input:string | null = useSelector((state:RootState) => state.input.json);
+  const input:string | null = useSelector((state:RootState) => state.input.currentJson);
 
   return (
-    <Container fixed>
+    <Container sx={{
+      maxWidth: "100%",
+      maxHeight: "100%",
+      width: "100%",
+      wordWrap: "break-word",
+      textAlign: "left",}}>
+
       <pre>{JSON.stringify(input, null, 3)}</pre>
+      
     </Container>
   );
 }
