@@ -9,7 +9,6 @@ const JsonDiff = () => {
 
   const handleLineClick = (lineId:any) => {
     const lineNumber = Number(lineId.slice(2));
-    console.log("line id: ", lineNumber);
     const textArea = document.getElementsByClassName("jsoneditor-text")[0];
     textArea.scrollTop = lineNumber * 14;
   }
@@ -19,6 +18,7 @@ const JsonDiff = () => {
     newValue={JSON.stringify(currentJson, null, 2)}
     splitView={true}
     onLineNumberClick={handleLineClick}
+    
   />
   );
 }

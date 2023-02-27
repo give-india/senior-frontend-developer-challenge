@@ -25,6 +25,7 @@ export const jsonInputSlice = createSlice({
       state.oldJson = action.payload;
     },
     applyPatch:(state, action:PayloadAction<Operation[]>) => {
+      console.log("Apply Patch slice", action.payload);
       state.currentJson = jsonpatch.applyPatch(state.currentJson, action.payload).newDocument;
     }
   }

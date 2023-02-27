@@ -10,9 +10,24 @@ import { Patch, PatchData, PatchStatus, savePatches } from "../store/patch-slice
 const PatchInputForm = ({prevFormStep, modalClose}) => {
   const { register, handleSubmit, watch, reset, setError, formState: { errors } } = useForm();
   const patches:Patch[] = useSelector((state:RootState) => state.patch.patches);
-  const patchStr = patches ? JSON.stringify(patches, null, 2) : '';
+  const selectedPatchIndex:number|null = useSelector((state:RootState) => state.patch.selectedIndex);
   const dispatch = useDispatch();
- 
+  
+  const setPatchString = () => {
+    if(patches.length > 0 && selectedPatchIndex === null) {
+      const patchData:PatchData[] = patches.map((patch) => patch.data);
+      return JSON.stringify(patchData, null, 2);
+    }else if(selectedPatchIndex !== null) {
+      return JSON.stringify(patches[selectedPatchIndex].data);
+    }
+    return '';
+  }
+
+  const patchStr:string = setPatchString();
+  
+  const setNotValidError = () => {
+    setError("patch", {type:"custom", "message":"Please enter valid patch"});
+  }
 
   //@ts-ignore
   const onSubmit = (data) => {
@@ -29,14 +44,22 @@ const PatchInputForm = ({prevFormStep, modalClose}) => {
         allPatches  = allPatches.concat(newPatches);
       } else {
         const newPatch:Patch= {data:{...jsonData}, status:PatchStatus.NOTAPPLICABLE};
+        if(selectedPatchIndex !== null) {
+          allPatches = allPatches.map((patch, i) => {
+            return(
+              i === selectedPatchIndex ? newPatch : patch
+            )
+         });
+        }
         allPatches.push(newPatch);
       }
       dispatch(savePatches(allPatches));
       modalClose();
     }catch(e) {
-      setError("patch", {type:"custom", "message":"Please enter valid patch"});
+      setNotValidError();
     }
   }
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

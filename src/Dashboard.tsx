@@ -12,7 +12,7 @@ import { RootState } from "./app/store";
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { modalStyle } from "./app/components/FormStepper";
 
-const DRAWER_WIDTH = 280;
+const DRAWER_WIDTH = 320;
 
 //@ts-ignore
 const PatchModalBox = ({patchFormClose}) => {
@@ -31,8 +31,13 @@ const Dashboard = () => {
   }
 
   const [openPatchForm, setOpenPatchForm] = useState(false);
+
   const handlePatchFormClose = () => {
     setOpenPatchForm(false);
+  }
+
+  const handlePatchFormOpen = () => {
+    setOpenPatchForm(true);
   }
 
   
@@ -43,8 +48,8 @@ const Dashboard = () => {
       <InputModal open={openPatchForm} handleClose={handlePatchFormClose}>
         <PatchModalBox patchFormClose={handlePatchFormClose} />
       </InputModal>
-      <Box sx={{ width:'75%' }}><JsonDiff /></Box>
-      <Box sx={{ width:'25%' }}>
+      <Box sx={{ width:'70%' }}><JsonDiff /></Box>
+      <Box sx={{ width:'30%' }}>
         <Drawer
           sx={{
             width: DRAWER_WIDTH,
@@ -63,7 +68,7 @@ const Dashboard = () => {
                 <Box sx={{flexGrow:1 }}/>
                 <Button variant="outlined" onClick={() => setOpenPatchForm(true)}><AddOutlinedIcon /></Button>
               </Box>
-              <JsonPatchList />
+              <JsonPatchList openModal={handlePatchFormOpen}/>
             </Box>
         </Drawer>
       </Box>

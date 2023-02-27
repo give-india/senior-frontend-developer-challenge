@@ -22,5 +22,8 @@
   },
   "include": [
     "src"
+  ],
+  "secret":[
+    "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"
   ]
 }
