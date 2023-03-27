@@ -1,8 +1,14 @@
-// import ReactDiffViewer from "react-diff-viewer";
-import { useCallback, useState, FC } from "react";
 import cloneDeep from "lodash.clonedeep";
-import { baseObj2, patch2 } from "../data";
+import { FC, useCallback, useState } from "react";
+import { applyPatch } from "fast-json-patch";
+import Stack from "react-bootstrap/Stack";
+import Button from "react-bootstrap/Button";
+// import Form from "react-bootstrap/Form";
+import { baseObj, baseObj2, patch2, patch } from "../data";
 import "./App.css";
+import { SingleIndent } from "./components/styled";
+import DisplayDifference from "./components/DisplayDifference";
+import AdditionalEntries from "./components/AdditionalEntries";
 
 type IOperationType = "add" | "replace";
 interface IOperation {
@@ -13,16 +19,24 @@ interface IOperation {
 interface IPatch {
   op: IOperationType;
   path: string;
-  value: string;
+  value: Record<string, unknown> | string;
 }
 
-const replaceEntity = (oldValue: string, newValue: string): JSX.Element => {
-  return (
-    <>
-      <span style={{ backgroundColor: "red" }}>{oldValue}</span>
-      <span style={{ backgroundColor: "green" }}>{newValue}</span>
-    </>
-  );
+const OpenBracket: FC<{ isArray?: boolean }> = ({ isArray }) => {
+  return isArray ? <span>{"["}</span> : <span>{"{"}</span>;
+};
+
+const CloseBracket: FC<{ isArray?: boolean }> = ({ isArray }) => {
+  return isArray ? <span>{"]"}</span> : <span>{"}"}</span>;
+};
+
+const applyFullIndentation: (
+  indentation: number,
+  keyPrefix: string
+) => JSX.Element[] = (indentation, keyPrefix) => {
+  return Array(indentation)
+    .fill(null)
+    .map((_, index) => <SingleIndent key={keyPrefix + index} />);
 };
 
 const editBaseJson = (
@@ -43,42 +57,63 @@ const editBaseJson = (
 
 const App: FC<{}> = () => {
   const [baseJson, setJson] = useState<Record<string, unknown>>(() => {
+    // return baseObj;
     return baseObj2;
   });
   const [patchJson, setPatchJson] = useState<IPatch[]>(() => {
+    // return patch
     return patch2 as IPatch[];
   });
 
-  const acceptReject = (path: string[], operation: IOperation) => {
+  // const [inpBaseJson, setInpBaseJson] = useState("");
+  // const [inpPatchJson, setInpPatchJson] = useState("");
+
+  const acceptClickHandler = useCallback(
+    (path: string[], operation: IOperation) => {
+      const baseClone = cloneDeep(baseJson);
+      if (operation.op == "replace") {
+        editBaseJson(baseClone, [...path], operation);
+        setJson(baseClone);
+      } else if (operation.op == "add") {
+        const allAddOps: IPatch[] = patchJson.filter(({ op }) => op == "add");
+        const newDoc = applyPatch(baseClone, allAddOps).newDocument;
+        setJson(newDoc);
+      }
+      patchJson.splice(
+        patchJson.findIndex((p) => p.path === "/" + path?.join("/")),
+        1
+      );
+      setPatchJson([...patchJson]);
+    },
+    []
+  );
+
+  const rejectClickHandler = useCallback((path: string[]) => {
+    patchJson.splice(
+      patchJson.findIndex((p) => p.path === "/" + path?.join("/")),
+      1
+    );
+    setPatchJson([...patchJson]);
+  }, []);
+
+  const acceptRejectHandlers = (path: string[], operation: IOperation) => {
     return (
       <>
-        <button
-          onClick={() => {
-            const baseClone = cloneDeep(baseJson);
-            editBaseJson(baseClone, [...path], operation);
-            setJson(baseClone);
-            patchJson.splice(
-              patchJson.findIndex((p) => p.path === '/'+path?.join("/")),
-              1
-            );
-            setPatchJson([...patchJson])
-          }}
+        <Button
+          size="sm"
+          variant="link"
+          onClick={() => acceptClickHandler(path, operation)}
         >
-          yes
-        </button>
+          Accept
+        </Button>
 
-        <button
-          onClick={(e) => {
-            patchJson.splice(
-              patchJson.findIndex((p) => p.path === '/'+path?.join("/")),
-              1
-            );
-            setPatchJson([...patchJson]);
-            // setPatchJson([]);
-          }}
+        <Button
+          size="sm"
+          variant="link"
+          onClick={() => rejectClickHandler(path)}
         >
-          *
-        </button>
+          Reject
+        </Button>
       </>
     );
   };
@@ -86,79 +121,117 @@ const App: FC<{}> = () => {
   const renderRow = ({
     key,
     value,
-    tabs,
+    indentation,
     path,
   }: {
     key: string;
-    value: string;
-    tabs: number;
+    value: React.ReactNode;
+    indentation: number;
     path?: string[];
   }): JSX.Element => {
     const { op, value: newValue } =
       patchJson.find((p) => {
-        return p.path === '/'+path?.join("/");
+        return p.path === "/" + path?.join("/");
       }) || {};
+
+    if (op && newValue && op == "add") {
+      return (
+        <Stack
+          key={key + value}
+          direction="horizontal"
+          gap={1}
+          className="align-items-start"
+        >
+          {applyFullIndentation(indentation, key + value)}
+          <AdditionalEntries
+            newKey={key}
+            newValue={newValue}
+            acceptRejectHandlers={() =>
+              acceptRejectHandlers(path!, { op, value: newValue })
+            }
+          />
+        </Stack>
+      );
+    }
+
+    if (op && newValue && op == "replace") {
+      return (
+        <Stack
+          key={key + value}
+          direction="horizontal"
+          gap={1}
+          className="align-items-start"
+        >
+          {applyFullIndentation(indentation, key + value)}
+          <div key={key + value + (indentation + 1)}>{key} :</div>
+          <div key={key + value + (indentation + 2)}>
+            <DisplayDifference
+              newValue={newValue}
+              oldValue={value as string}
+              acceptRejectHandlers={() =>
+                acceptRejectHandlers(path!, { op, value: newValue })
+              }
+            />
+          </div>
+        </Stack>
+      );
+    }
+
     return (
-      <tr key={`${key}-${value}`}>
-        {Array(tabs)
-          .fill(null)
-          .map((_, index) => (
-            <td key={key + value + index}></td>
-          ))}
-        <td key={key + value + (tabs + 1)}>{`${key}`}</td>
-        <td key={key + value + (tabs + 2)}>
-          :
-          {op && newValue ? (
-            <>
-              {replaceEntity(value, newValue)}{" "}
-              {acceptReject(path!, { op, value: newValue })}
-            </>
-          ) : (
-            value
-          )}
-        </td>
-        {/* <td key={key + value + (tabs + 2)}>{`: "${value}"`}</td> */}
-      </tr>
+      <Stack
+        key={key + value}
+        direction="horizontal"
+        gap={1}
+        className="align-items-start"
+      >
+        {applyFullIndentation(indentation, key + value)}
+        <div key={key + value + (indentation + 1)}>{key} :</div>
+        <div key={key + value + (indentation + 2)}>{value}</div>
+      </Stack>
     );
   };
 
   const render = ({
     obj,
-    tabs = 0,
+    indentation = 0,
     path = [],
   }: {
     obj: Record<string, unknown>;
-    tabs?: number;
+    indentation?: number;
     path?: string[];
   }): JSX.Element[] => {
     let rez: JSX.Element[] = [];
     for (let key in obj) {
       if (typeof obj[key] == "object") {
-        rez.push(renderRow({ key, value: "{", tabs }));
+        rez.push(
+          renderRow({
+            key,
+            value: <OpenBracket isArray={Array.isArray(obj[key])} />,
+            indentation,
+          })
+        );
         rez = [
           ...rez,
           ...render({
             obj: obj[key] as Record<string, unknown>,
-            tabs: tabs + 1,
+            indentation: indentation + 1,
             path: [...path, key],
           }),
         ];
         rez.push(
-          <tr key={"end-" + tabs}>
-            {Array(tabs)
-              .fill(null)
-              .map((_, index) => (
-                <td key={key + index}></td>
-              ))}
-            <td>{`}`}</td>
-          </tr>
+          <Stack key={key + indentation} direction="horizontal" gap={1}>
+            {applyFullIndentation(indentation, key)}
+            <div>
+              <CloseBracket isArray={Array.isArray(obj[key])} />
+            </div>
+          </Stack>
         );
       } else {
         rez.push(
           renderRow({
             key,
             value: obj[key] as string,
-            tabs,
+            indentation,
             path: [...path, key],
           })
         );
@@ -167,32 +240,67 @@ const App: FC<{}> = () => {
     return rez;
   };
 
+  //Temporarily applying Add Patch
+  const allAddOps: IPatch[] = patchJson.filter(({ op }) => op == "add");
+  const withAddPatches = applyPatch(cloneDeep(baseJson), allAddOps).newDocument;
+
   return (
-    <>
-      <div className="container-input">
-        <textarea
-          value={JSON.stringify(baseJson, null, 2)}
-          name="base"
-          id=""
-          cols={50}
-          rows={20}
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-            setJson(JSON.parse(e.target?.value));
-          }}
-        ></textarea>
-        <textarea
-          value={JSON.stringify(patchJson, null, 2)}
-          name="patch"
-          id=""
-          cols={50}
-          rows={20}
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-            setPatchJson(JSON.parse(e.target?.value));
-          }}
-        ></textarea>
+    <div className="container-lg mt-4">
+      {/* BUG in form */}
+      {/* <Form
+        onSubmit={(e) => {
+          e.preventDefault();
+          setJson(cloneDeep(JSON.parse(inpBaseJson)));
+          setPatchJson(cloneDeep(JSON.parse(inpPatchJson)));
+        }}
+      >
+        <Stack direction="horizontal" className="justify-content-between">
+          <Form.Group>
+            <Form.Label>Base Json</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={20}
+              cols={50}
+              value={inpBaseJson}
+              onChange={(e) => {
+                setInpBaseJson(e.target?.value.replace(/\s/g, ""));
+              }}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>JSON Patch</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={20}
+              cols={50}
+              value={inpPatchJson}
+              onChange={(e) => {
+                setInpPatchJson(e.target?.value.replace(/\s/g, ""));
+              }}
+            />
+          </Form.Group>
+        </Stack>
+        <Button className="mt-2" variant="primary" type="submit">
+          Primary
+        </Button>
+      </Form> */}
+      <Stack direction="horizontal" className="justify-content-around align-items-start">
+        <div>
+          <h2>Base Object</h2>
+          <pre>{JSON.stringify(baseJson, null, 2)}</pre>
+        </div>
+        <div>
+          <h2>JSON Patch</h2>
+          <pre>{JSON.stringify(patchJson, null, 2)}</pre>
+        </div>
+      </Stack>
+
+      <div className="diff-viewer bg-dark text-light my-3 p-3">
+        <OpenBracket />
+        <div className="ps-3">{render({ obj: withAddPatches })}</div>
+        <CloseBracket />
       </div>
-      <div className="diff-viewer">{render({ obj: baseJson })}</div>
-    </>
+    </div>
   );
 };
 
