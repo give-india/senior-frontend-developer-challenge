@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { prettyPrintJson } from "pretty-print-json";
 
 function App() {
@@ -107,6 +107,7 @@ function App() {
     ],
     tags: ["hoh18", "lfc19", "tbpp", "housie19", "gfc2020", "housie18"],
   };
+  const [transformedObj, setTransformedObj] = useState({});
 
   useEffect(() => {
     try {
@@ -114,26 +115,58 @@ function App() {
       elem.innerHTML = prettyPrintJson.toHtml(data);
       const jsonPatchItem = document.getElementById("json-patch");
       jsonPatchItem.innerHTML = prettyPrintJson.toHtml(jsonPatch);
+      if (Object.keys(transformedObj).length) {
+        const transformedPatchEle =
+          document.getElementById("transformed-patch");
+        transformedPatchEle.innerHTML = prettyPrintJson.toHtml(transformedObj);
+      }
     } catch (e) {
       console.log(e);
     }
     // eslint-disable-next-line
-  }, []);
+  }, [transformedObj]);
+
+  const transformObj = (path, obj, value) => {
+    if (path.length === 1) {
+      return (obj[path[0]] = value);
+    }
+    return transformObj(path.slice(1), obj[path[0]], value);
+  };
+
+  const applyPatch = () => {
+    let updatedPatch = jsonPatch.reduce((acc, item) => {
+      let splitPaths = item.path.split("/").filter((item) => item !== "");
+      transformObj(splitPaths, acc, item.value);
+      return acc;
+    }, data);
+    setTransformedObj(updatedPatch);
+  };
 
   return (
     <div className="container">
       <div className="row">
         <div className="column">
           <div>
+            <pre id="account"></pre>
+          </div>
+        </div>
+        <div className="column">
+          <div className="flex justify-space-between">
+            <h3 style={{ display: "inline-block", margin: "unset" }}>
+              JSON Patch
+            </h3>
+            <button className="apply-button" onClick={() => applyPatch()}>
+              Apply Patch
+            </button>
+          </div>
+          <div>
             <pre id="json-patch"></pre>
           </div>
         </div>
         <div className="column">
-          <div>
-            <pre id="account"></pre>
-          </div>
+          {" "}
+          <pre id="transformed-patch"></pre>
         </div>
-        <div className="column">Third part</div>
       </div>
     </div>
   );
