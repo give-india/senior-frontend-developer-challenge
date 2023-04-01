@@ -62,3 +62,20 @@ pre {
   justify-content: space-between;
   align-items: center;
 }
+
+.property-name {
+  margin-left: 16px; /* 2 spaces * 8px per space */
+}
+
+.strike-through {
+  text-decoration: line-through;
+}
+
+.red-bg {
+  background-color: lightcoral;
+  margin-right: 10px;
+}
+
+.green-bg {
+  background-color: aquamarine;
+}

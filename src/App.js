@@ -116,9 +116,10 @@ function App() {
       const jsonPatchItem = document.getElementById("json-patch");
       jsonPatchItem.innerHTML = prettyPrintJson.toHtml(jsonPatch);
       if (Object.keys(transformedObj).length) {
+        const transformedHtml = jsonToHtml(transformedObj);
         const transformedPatchEle =
           document.getElementById("transformed-patch");
-        transformedPatchEle.innerHTML = prettyPrintJson.toHtml(transformedObj);
+        transformedPatchEle.innerHTML = transformedHtml;
       }
     } catch (e) {
       console.log(e);
@@ -126,21 +127,107 @@ function App() {
     // eslint-disable-next-line
   }, [transformedObj]);
 
-  const transformObj = (path, obj, value) => {
-    if (path.length === 1) {
-      return (obj[path[0]] = value);
+  function jsonToHtml(obj, indent = 0) {
+    var html = "";
+    var indentSize = 2; // Number of spaces to indent each level
+    var indentStr = "&nbsp;".repeat(indent * indentSize); // String of spaces for indentation
+
+    if (typeof obj === "object" && !Array.isArray(obj)) {
+      html += indentStr + "{<br>";
+    } else if (Array.isArray(obj)) {
+      html += indentStr + "[<br>";
     }
-    return transformObj(path.slice(1), obj[path[0]], value);
+    for (var prop in obj) {
+      // console.log(prop, "prop");
+      if (obj.hasOwnProperty(prop)) {
+        if (!Array.isArray(obj))
+          html +=
+            indentStr + '<span class="property-name">' + prop + ": </span>";
+        if (obj[prop] !== "object" && obj[prop]["type"] === "render-html") {
+          html += indentStr;
+          if (obj[prop]["prevValue"]) {
+            html +=
+              '<span class="property-value red-bg strike-through">' +
+              obj[prop]["prevValue"] +
+              "</span>";
+          }
+          html +=
+            '<span class="property-value green-bg">' +
+            obj[prop]["currentValue"] +
+            "</span>";
+          // html += "<br>";
+        } else if (
+          typeof obj[prop] === "object" ||
+          obj[prop]?.["valueType"] === "object"
+        ) {
+          console.log(obj[prop]);
+          html += "<br>" + jsonToHtml(obj[prop], indent + 1);
+        } else {
+          html += '<span class="property-value">' + obj[prop] + "</span>";
+          if (!Array.isArray(obj) || isNaN(parseInt(prop))) {
+            // Check if prop is not an integer (in case of arrays)
+            html += ",";
+          }
+        }
+        html += "<br>";
+      }
+    }
+
+    if (typeof obj === "object" && !Array.isArray(obj)) {
+      html += indentStr + "}";
+    } else if (Array.isArray(obj)) {
+      html += indentStr + "]";
+    }
+
+    return html;
+  }
+
+  const transformObj = (path, obj, item) => {
+    const { value, op } = item;
+    if (path.length === 1) {
+      let prevValue = obj[path[0]];
+      return (obj[path[0]] = {
+        currentValue: value,
+        prevValue: prevValue,
+        type: "render-html",
+        valueType: typeof prevValue,
+        operation: op,
+      });
+    }
+    return transformObj(path.slice(1), obj[path[0]], item);
   };
 
   const applyPatch = () => {
     let updatedPatch = jsonPatch.reduce((acc, item) => {
       let splitPaths = item.path.split("/").filter((item) => item !== "");
-      transformObj(splitPaths, acc, item.value);
+      transformObj(splitPaths, acc, item);
       return acc;
     }, data);
     setTransformedObj(updatedPatch);
   };
+
+  function prettify() {
+    // var jsonInput = document.getElementById('json-input').value;
+    // var jsonObject = JSON.parse(transformObj);
+    debugger;
+    var jsonOutput = JSON.stringify(transformedObj, null, 4);
+    var html = "<pre>" + jsonOutput + "</pre>";
+
+    html = html.replace(
+      /"([^"]+)"\s*:/g,
+      '<span class=`property-name`>"$1":</span>'
+    );
+    html = html.replace(/"([^"]+)"/g, '<span class="string-value">"$1"</span>');
+    html = html.replace(/(\d+)/g, '<span class="number-value">$1</span>');
+    html = html.replace(
+      /(true|false)/g,
+      '<span class="boolean-value">$1</span>'
+    );
+
+    // jsonOutput.innerHTML = html;
+    document.getElementById("transformed-patch").innerHTML = html;
+    // document.getElementById('json-output').innerHTML = jsonOutput;
+  }
 
   return (
     <div className="container">
