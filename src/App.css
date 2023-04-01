@@ -72,10 +72,16 @@ pre {
 }
 
 .red-bg {
-  background-color: lightcoral;
-  margin-right: 10px;
+  background-color: lightpink;
+  margin-right: 5px;
+  color: black;
 }
 
 .green-bg {
-  background-color: aquamarine;
+  background-color: #99ffdd;
+  color: black;
+}
+
+.property-name {
+  font-weight: bold;
 }

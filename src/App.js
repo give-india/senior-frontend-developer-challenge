@@ -111,7 +111,7 @@ function App() {
 
   useEffect(() => {
     try {
-      const elem = document.getElementById("account");
+      const elem = document.getElementById("og-object");
       elem.innerHTML = prettyPrintJson.toHtml(data);
       const jsonPatchItem = document.getElementById("json-patch");
       jsonPatchItem.innerHTML = prettyPrintJson.toHtml(jsonPatch);
@@ -135,35 +135,39 @@ function App() {
     if (typeof obj === "object" && !Array.isArray(obj)) {
       html += indentStr + "{<br>";
     } else if (Array.isArray(obj)) {
-      html += indentStr + "[<br>";
+      html += "[<br>";
     }
     for (var prop in obj) {
-      // console.log(prop, "prop");
       if (obj.hasOwnProperty(prop)) {
         if (!Array.isArray(obj))
-          html +=
-            indentStr + '<span class="property-name">' + prop + ": </span>";
+          html += indentStr + '<span class="json-key">' + prop + ": </span>";
         if (obj[prop] !== "object" && obj[prop]["type"] === "render-html") {
-          html += indentStr;
           if (obj[prop]["prevValue"]) {
             html +=
-              '<span class="property-value red-bg strike-through">' +
+              '<span class="json-string red-bg strike-through">' +
               obj[prop]["prevValue"] +
               "</span>";
           }
-          html +=
-            '<span class="property-value green-bg">' +
-            obj[prop]["currentValue"] +
-            "</span>";
+          if (typeof obj[prop]["currentValue"] === "object") {
+            html +=
+              '<div class="json-string green-bg">' +
+              jsonToHtml(obj[prop]["currentValue"], indent + 1) +
+              "</div>";
+          } else {
+            html +=
+              '<span class="json-string green-bg">' +
+              obj[prop]["currentValue"] +
+              "</span>";
+          }
           // html += "<br>";
         } else if (
           typeof obj[prop] === "object" ||
           obj[prop]?.["valueType"] === "object"
         ) {
-          console.log(obj[prop]);
-          html += "<br>" + jsonToHtml(obj[prop], indent + 1);
+          // console.log(obj[prop]);
+          html += jsonToHtml(obj[prop], indent + 1);
         } else {
-          html += '<span class="property-value">' + obj[prop] + "</span>";
+          html += '<span class="json-string">' + obj[prop] + "</span>";
           if (!Array.isArray(obj) || isNaN(parseInt(prop))) {
             // Check if prop is not an integer (in case of arrays)
             html += ",";
@@ -190,7 +194,7 @@ function App() {
         currentValue: value,
         prevValue: prevValue,
         type: "render-html",
-        valueType: typeof prevValue,
+        valueType: typeof value,
         operation: op,
       });
     }
@@ -215,7 +219,7 @@ function App() {
 
     html = html.replace(
       /"([^"]+)"\s*:/g,
-      '<span class=`property-name`>"$1":</span>'
+      '<span class=`json-key`>"$1":</span>'
     );
     html = html.replace(/"([^"]+)"/g, '<span class="string-value">"$1"</span>');
     html = html.replace(/(\d+)/g, '<span class="number-value">$1</span>');
@@ -234,7 +238,8 @@ function App() {
       <div className="row">
         <div className="column">
           <div>
-            <pre id="account"></pre>
+            <h3>Orignal Object</h3>
+            <pre id="og-object"></pre>
           </div>
         </div>
         <div className="column">
@@ -251,7 +256,7 @@ function App() {
           </div>
         </div>
         <div className="column">
-          {" "}
+          <h3>Resultant Object</h3>
           <pre id="transformed-patch"></pre>
         </div>
       </div>
