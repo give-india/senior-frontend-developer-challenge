@@ -182,7 +182,6 @@ function App() {
     } else if (Array.isArray(obj)) {
       html += indentStr + "]";
     }
-
     return html;
   }
 
@@ -210,35 +209,12 @@ function App() {
     setTransformedObj(updatedPatch);
   };
 
-  function prettify() {
-    // var jsonInput = document.getElementById('json-input').value;
-    // var jsonObject = JSON.parse(transformObj);
-    debugger;
-    var jsonOutput = JSON.stringify(transformedObj, null, 4);
-    var html = "<pre>" + jsonOutput + "</pre>";
-
-    html = html.replace(
-      /"([^"]+)"\s*:/g,
-      '<span class=`json-key`>"$1":</span>'
-    );
-    html = html.replace(/"([^"]+)"/g, '<span class="string-value">"$1"</span>');
-    html = html.replace(/(\d+)/g, '<span class="number-value">$1</span>');
-    html = html.replace(
-      /(true|false)/g,
-      '<span class="boolean-value">$1</span>'
-    );
-
-    // jsonOutput.innerHTML = html;
-    document.getElementById("transformed-patch").innerHTML = html;
-    // document.getElementById('json-output').innerHTML = jsonOutput;
-  }
-
   return (
     <div className="container">
       <div className="row">
         <div className="column">
           <div>
-            <h3>Orignal Object</h3>
+            <h3 className="header">Orignal Object</h3>
             <pre id="og-object"></pre>
           </div>
         </div>
@@ -255,8 +231,10 @@ function App() {
             <pre id="json-patch"></pre>
           </div>
         </div>
-        <div className="column">
-          <h3>Resultant Object</h3>
+      </div>
+      <div className="row" style={{ marginBottom: 20 }}>
+        <h3 className="header">Resultant Object</h3>
+        <div>
           <pre id="transformed-patch"></pre>
         </div>
       </div>

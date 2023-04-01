@@ -15,16 +15,21 @@ body {
 .row {
   flex: 1;
   display: flex;
+  max-height: 50vh;
+  overflow: scroll;
 }
 
 .column {
   flex: 1;
   overflow-y: auto;
+  border: 1px solid #b4b4b4;
+  padding: 20px;
 }
 
 /* Set the background color of the parts */
 .column:nth-child(1) {
   background-color: #e6e6dd;
+  border-right: unset;
 }
 
 .column:nth-child(2) {
@@ -84,4 +89,9 @@ pre {
 
 .property-name {
   font-weight: bold;
+}
+
+.header {
+  padding: 10px 25px;
+  margin: unset;
 }
