@@ -272,7 +272,7 @@ const App = () => {
           </div>
         </div>
       </div>
-      <div className="row" style={{ marginBottom: 20 }}>
+      <div className="row" style={{ paddingBottom: 20 }}>
         <h3 className="header">Resultant Object</h3>
         <div>
           <pre id="transformed-patch"></pre>
