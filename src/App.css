@@ -67,7 +67,9 @@ pre {
   justify-content: space-between;
   align-items: center;
 }
-
+.align-center {
+  align-items: center;
+}
 .property-name {
   margin-left: 16px; /* 2 spaces * 8px per space */
 }
@@ -94,4 +96,50 @@ pre {
 .header {
   padding: 10px 25px;
   margin: unset;
+}
+
+/* TOOLTIP */
+
+.html-render-span {
+  position: relative;
+  display: inline-block;
+}
+
+.html-render-span .tooltiptext {
+  visibility: hidden;
+  width: 135px;
+  background-color: #e6e6dd;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  position: absolute;
+  display: table;
+  z-index: 1;
+  right: -100px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
+}
+
+.html-render-span:hover .tooltiptext {
+  visibility: visible;
+}
+
+/* RED DOT ON PATCH UPDATE */
+
+.red-dot-container {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.red-dot {
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
 }
