@@ -1,0 +1,156 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Source+Code+Pro:wght@400;600&display=swap");
+
+body,
+button {
+  font-family: "Inter", sans-serif;
+}
+
+code,
+pre {
+  font-family: "Source Code Pro", monospace;
+  font-weight: 400;
+  font-size: 14px;
+  margin: 4px 16px;
+  line-height: 18px;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.fw-semibold {
+  font-weight: 600;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.json-input-taker-wrapper {
+  width: 100vw;
+  height: 100vh;
+  background: #eaf0ef;
+  display: flex;
+  flex-direction: column;
+}
+
+.json-input-taker {
+  flex: 1;
+  display: flex;
+  max-height: calc(100vh - 40px);
+  padding: 0 8px;
+}
+
+.json-input-base-object,
+.json-input-patch-array {
+  overflow: scroll;
+  height: calc(100% - 16px);
+  padding: 16px;
+  flex: 1 1;
+  box-sizing: border-box;
+  background: #fff;
+  margin: 16px 8px 0px 8px;
+  box-shadow: 0px 0px 14px 4px #d1d1d2;
+}
+
+.json-input-taker-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 8px 16px;
+  height: 40px;
+}
+
+.action-btn-primary {
+  height: 24px;
+  background: #286ca0;
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  font-size: 12px;
+  padding: 0 30px;
+  cursor: pointer;
+}
+
+.json-actions-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background: #eaf0ef;
+  flex-direction: column;
+}
+
+.json-actions-header {
+  height: 40px;
+}
+
+.json-actions-body {
+  flex: 1;
+  height: calc(100vh - 40px);
+  display: flex;
+}
+
+.json-actions-modified-obj {
+  width: 70%;
+  height: 100%;
+  overflow: scroll;
+  padding: 16px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-bottom: solid 16px #eaf0ef;
+  border-left: solid 16px #eaf0ef;
+  border-right: solid 16px #eaf0ef;
+}
+
+.json-actions-patches {
+  width: 30%;
+  height: 100%;
+  overflow: scroll;
+  padding: 16px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-bottom: solid 16px #eaf0ef;
+  border-right: solid 16px #eaf0ef;
+}
+
+.mod-add {
+  background: #bdf9c0;
+  display: inline-block;
+  border: 1px solid #51e48f;
+  border-radius: 5px;
+  margin: 0.5px;
+  cursor: pointer;
+}
+
+.mod-replace {
+  background: #f9bdc5;
+  display: inline-block;
+  border: 1px solid #f62f60;
+  border-radius: 5px;
+  margin: 0.5px;
+  cursor: pointer;
+}
+.patch-action-btns {
+  position: absolute;
+  top: 2px;
+  left: -78px;
+  padding-right: 20px;
+  display: none;
+}
+.patch-action-approve {
+  border: 1px solid #30cd27;
+  background: #d3efdb;
+  padding: 4px 8px;
+  cursor: pointer;
+  margin-right: 6px;
+}
+
+.patch-action-reject {
+  border: 1px solid #df1313;
+  background: #f0e4eb;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.render-change-wrapper:hover > .patch-action-btns {
+  display: block;
+}
