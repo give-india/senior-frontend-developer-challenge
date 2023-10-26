@@ -1,0 +1,38 @@
+.App {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.input-box {
+  width: 400px;
+  height: 200px;
+  margin: 10px;
+  resize: none;
+}
+
+.patch-operation-table {
+  border-style: solid;
+  border-color: black;
+  margin: 10px;
+  min-width: 800px;
+}
+
+.patch-operation-row {
+  margin: 10px;
+}
+
+.patch-operation-row:hover {
+  background-color: aliceblue;
+}
+
+.patch-operation-row-item {
+  margin: 10px;
+}
+
+.error-message {
+  color: red;
+}
