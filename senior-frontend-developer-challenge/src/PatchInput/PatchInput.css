@@ -1,0 +1,49 @@
+.patch-input-container {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .manual-input-section,
+  .upload-section {
+    margin-bottom: 20px;
+  }
+  
+  .input-container {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #ffffff;
+  }
+  
+  .operation-group {
+    margin-bottom: 10px;
+  }
+  
+  .radio-label {
+    margin-right: 10px;
+  }
+  
+  .input-field {
+    margin-bottom: 10px;
+  }
+  
+  .input-field input {
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .or-divider {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .upload-section input[type="file"] {
+    padding: 5px;
+  }
+  

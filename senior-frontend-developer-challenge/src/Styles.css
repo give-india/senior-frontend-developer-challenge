@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+  
+}
+.parent-class{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+.child-class{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}
+.child-class:last-child{
+  padding: 10px;
+  margin: 5px;
+  width: 600px;
+}
+.heading{
+  font-size: 20px;
+  text-decoration: underline;
+  font-weight: 700;
+}
+.current-object, .patch-item{
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 600px;
+  word-wrap: break-word;
+}
+    .patch-item:hover ,.current-object:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .buttons {
+    margin-left: 10px;
+  }
+  
+  .accept-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  
+  .reject-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
